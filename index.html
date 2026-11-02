@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ETHBTC-USDT | Connexion</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #21150f;
+  color: #fff4e6;
+}
+
+header {
+  padding: 24px 12px;
+  text-align: center;
+  background: #3b2418;
+  border-bottom: 2px solid #d4a45a;
+}
+
+header h1 {
+  margin: 0;
+  color: #e5b86b;
+  font-size: 27px;
+}
+
+header p {
+  margin-bottom: 0;
+  color: #f5e2c8;
+}
+
+.container {
+  width: 92%;
+  max-width: 440px;
+  margin: 28px auto;
+  padding: 22px;
+  background: #38251b;
+  border: 1px solid #805a3b;
+  border-radius: 16px;
+}
+
+h2 {
+  text-align: center;
+  color: #e5b86b;
+}
+
+label {
+  display: block;
+  margin-top: 14px;
+  margin-bottom: 6px;
+}
+
+input, select, button {
+  width: 100%;
+  padding: 13px;
+  border-radius: 8px;
+  font-size: 15px;
+}
+
+input, select {
+  color: #fff;
+  background: #241811;
+  border: 1px solid #806044;
+}
+
+button {
+  margin-top: 18px;
+  border: none;
+  background: #d6a34e;
+  color: #24170d;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.6;
+}
+
+.switch {
+  text-align: center;
+  margin-top: 18px;
+}
+
+.switch button {
+  margin-top: 6px;
+  background: transparent;
+  border: 1px solid #d6a34e;
+  color: #f4d39b;
+}
+
+#message {
+  overflow-wrap: anywhere;
+  line-height: 1.5;
+  margin-top: 16px;
+}
+
+.note {
+  color: #d8c1a8;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+footer {
+  text-align: center;
+  color: #c6ad93;
+  font-size: 12px;
+  padding: 25px 10px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>ETHBTC-USDT</h1>
+  <p>Votre espace personnel</p>
+</header>
+
+<main class="container">
+
+  <section id="register">
+    <h2>Créer un compte</h2>
+
+    <form id="registerForm">
+
+      <label for="fullname">Nom complet</label>
+      <input id="fullname" type="text"
+             autocomplete="name" required>
+
+      <label for="country">Choisir votre pays</label>
+      <select id="country" required>
+        <option value="CD|+243">🇨🇩 RDC (+243)</option>
+        <option value="CI|+225">🇨🇮 Côte d'Ivoire (+225)</option>
+        <option value="MA|+212">🇲🇦 Maroc (+212)</option>
+        <option value="CG|+242">🇨🇬 Congo-Brazzaville (+242)</option>
+        <option value="CM|+237">🇨🇲 Cameroun (+237)</option>
+        <option value="SN|+221">🇸🇳 Sénégal (+221)</option>
+        <option value="ML|+223">🇲🇱 Mali (+223)</option>
+        <option value="BF|+226">🇧🇫 Burkina Faso (+226)</option>
+        <option value="BJ|+229">🇧🇯 Bénin (+229)</option>
+        <option value="TG|+228">🇹🇬 Togo (+228)</option>
+        <option value="GA|+241">🇬🇦 Gabon (+241)</option>
+        <option value="RW|+250">🇷🇼 Rwanda (+250)</option>
+        <option value="BI|+257">🇧🇮 Burundi (+257)</option>
+        <option value="UG|+256">🇺🇬 Ouganda (+256)</option>
+        <option value="KE|+254">🇰🇪 Kenya (+254)</option>
+        <option value="NG|+234">🇳🇬 Nigeria (+234)</option>
+        <option value="GH|+233">🇬🇭 Ghana (+233)</option>
+        <option value="ZA|+27">🇿🇦 Afrique du Sud (+27)</option>
+        <option value="FR|+33">🇫🇷 France (+33)</option>
+        <option value="BE|+32">🇧🇪 Belgique (+32)</option>
+      </select>
+
+      <label for="phone">Numéro de téléphone</label>
+      <input id="phone" type="tel"
+             placeholder="Ex. 812345678"
+             autocomplete="tel-national"
+             inputmode="tel" required>
+
+      <label for="password">Créer un mot de passe</label>
+      <input id="password" type="password"
+             minlength="8" autocomplete="new-password"
+             placeholder="8 caractères minimum" required>
+
+      <label for="password2">Confirmer le mot de passe</label>
+      <input id="password2" type="password"
+             minlength="8" autocomplete="new-password"
+             required>
+
+      <button id="registerButton" type="submit">
+        Créer mon compte
+      </button>
+    </form>
+
+    <p class="note">
+      Utilisez un mot de passe unique. Votre numéro doit
+      inclure l'indicatif du pays sélectionné.
+    </p>
+
+    <div class="switch">
+      Déjà inscrit ?
+      <button type="button" onclick="showLogin()">
+        Se connecter
+      </button>
+    </div>
+  </section>
+
+  <section id="login" hidden>
+    <h2>Connexion</h2>
+
+    <form id="loginForm">
+
+      <label for="loginCountry">Pays</label>
+      <select id="loginCountry" required>
+        <option value="CD|+243">🇨🇩 RDC (+243)</option>
+        <option value="CI|+225">🇨🇮 Côte d'Ivoire (+225)</option>
+        <option value="MA|+212">🇲🇦 Maroc (+212)</option>
+        <option value="CG|+242">🇨🇬 Congo-Brazzaville (+242)</option>
+        <option value="CM|+237">🇨🇲 Cameroun (+237)</option>
+        <option value="SN|+221">🇸🇳 Sénégal (+221)</option>
+        <option value="ML|+223">🇲🇱 Mali (+223)</option>
+        <option value="BF|+226">🇧🇫 Burkina Faso (+226)</option>
+        <option value="BJ|+229">🇧🇯 Bénin (+229)</option>
+        <option value="TG|+228">🇹🇬 Togo (+228)</option>
+        <option value="GA|+241">🇬🇦 Gabon (+241)</option>
+        <option value="RW|+250">🇷🇼 Rwanda (+250)</option>
+        <option value="BI|+257">🇧🇮 Burundi (+257)</option>
+        <option value="UG|+256">🇺🇬 Ouganda (+256)</option>
+        <option value="KE|+254">🇰🇪 Kenya (+254)</option>
+        <option value="NG|+234">🇳🇬 Nigeria (+234)</option>
+        <option value="GH|+233">🇬🇭 Ghana (+233)</option>
+        <option value="ZA|+27">🇿🇦 Afrique du Sud (+27)</option>
+        <option value="FR|+33">🇫🇷 France (+33)</option>
+        <option value="BE|+32">🇧🇪 Belgique (+32)</option>
+      </select>
+
+      <label for="loginPhone">Numéro de téléphone</label>
+      <input id="loginPhone" type="tel"
+             placeholder="Votre numéro"
+             autocomplete="tel-national"
+             inputmode="tel" required>
+
+      <label for="loginPassword">Mot de passe</label>
+      <input id="loginPassword" type="password"
+             autocomplete="current-password" required>
+
+      <button id="loginButton" type="submit">
+        Se connecter
+      </button>
+    </form>
+
+    <div class="switch">
+      Nouveau membre ?
+      <button type="button" onclick="showRegister()">
+        Créer un compte
+      </button>
+    </div>
+  </section>
+
+  <section id="dashboard" hidden>
+    <h2>Bienvenue sur ETHBTC-USDT</h2>
+    <p id="welcome"></p>
+    <p>Votre compte est connecté.</p>
+    <button type="button" onclick="logout()">
+      Se déconnecter
+    </button>
+  </section>
+
+  <p id="message" role="status" aria-live="polite"></p>
+</main>
+
+<footer>
+  ETHBTC-USDT · Espace membre
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+const SUPABASE_URL = "VOTRE_SUPABASE_URL";
+const SUPABASE_KEY = "VOTRE_CLE_PUBLIQUE";
+
+const configured =
+  SUPABASE_URL.startsWith("https://") &&
+  !SUPABASE_URL.includes("VOTRE_") &&
+  !SUPABASE_KEY.includes("VOTRE_");
+
+let db = null;
+
+if (configured) {
+  db = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
+}
+
+const $ = id => document.getElementById(id);
+
+function message(text, error = false) {
+  $("message").textContent = text;
+  $("message").style.color = error ? "#ff9b91" : "#a9e6ae";
+}
+
+function showLogin() {
+  $("register").hidden = true;
+  $("login").hidden = false;
+  $("dashboard").hidden = true;
+  message("");
+}
+
+function showRegister() {
+  $("register").hidden = false;
+  $("login").hidden = true;
+  $("dashboard").hidden = true;
+  message("");
+}
+
+function phoneNumber(countryId, phoneId) {
+  const [, dial] = $(countryId).value.split("|");
+  let digits = $(phoneId).value.replace(/\D/g, "");
+
+  // Accepte aussi un numéro saisi avec l'indicatif.
+  if (digits.startsWith(dial.slice(1))) {
+    digits = digits.slice(dial.length - 1);
+  }
+
+  if (!digits) {
+    throw new Error("Entrez votre numéro de téléphone.");
+  }
+
+  return dial + digits;
+}
+
+function friendlyError(error) {
+  const text = error.message || "Une erreur est survenue.";
+
+  if (/already registered|already exists/i.test(text)) {
+    return "Ce numéro possède déjà un compte.";
+  }
+
+  if (/invalid login credentials/i.test(text)) {
+    return "Numéro ou mot de passe incorrect.";
+  }
+
+  if (/phone.*confirm|confirmation/i.test(text)) {
+    return "La confirmation du téléphone est encore requise dans Supabase.";
+  }
+
+  return text;
+}
+
+async function saveProfile(user, details) {
+  if (!user || !db) return;
+
+  const { error } = await db.from("profiles").upsert({
+    id: user.id,
+    full_name: details.full_name,
+    phone: user.phone || details.phone,
+    country_code: details.country_code,
+    country_name: details.country_name
+  }, { onConflict: "id" });
+
+  if (error) {
+    console.error("Profil non enregistré :", error.message);
+  }
+}
+
+function showDashboard(user) {
+  $("register").hidden = true;
+  $("login").hidden = true;
+  $("dashboard").hidden = false;
+
+  $("welcome").textContent =
+    "Connecté : " + (user.phone || "membre");
+
+  message("");
+}
+
+$("registerForm").addEventListener("submit", async event => {
+  event.preventDefault();
+
+  if (!db) {
+    return message("Configurez d'abord l'URL et la clé publique Supabase.", true);
+  }
+
+  const button = $("registerButton");
+  button.disabled = true;
+
+  try {
+    const fullName = $("fullname").value.trim();
+    const password = $("password").value;
+    const password2 = $("password2").value;
+
+    if (password !== password2) {
+      throw new Error("Les deux mots de passe ne correspondent pas.");
+    }
+
+    if (password.length < 8) {
+      throw new Error("Le mot de passe doit contenir au moins 8 caractères.");
+    }
+
+    const [countryCode] = $("country").value.split("|");
+    const countryName = $("country").selectedOptions[0].textContent;
+    const phone = phoneNumber("country", "phone");
+
+    message("Création du compte en cours...");
+
+    const { data, error } = await db.auth.signUp({
+      phone,
+      password,
+      options: {
+        data: {
+          full_name: fullName,
+          country_code: countryCode,
+          country_name: countryName
+        }
+      }
+    });
+
+    if (error) throw error;
+
+    if (data.session && data.user) {
+      await saveProfile(data.user, {
+        full_name: fullName,
+        phone,
+        country_code: countryCode,
+        country_name: countryName
+      });
+
+      showDashboard(data.user);
+    } else {
+      message(
+        "Supabase a créé la demande, mais aucune session n'a été ouverte. Vérifiez la configuration de confirmation du téléphone.",
+        true
+      );
+    }
+  } catch (error) {
+    message(friendlyError(error), true);
+  } finally {
+    button.disabled = false;
+  }
+});
+
+$("loginForm").addEventListener("submit", async event => {
+  event.preventDefault();
+
+  if (!db) {
+    return message("Configurez d'abord Supabase.", true);
+  }
+
+  const button = $("loginButton");
+  button.disabled = true;
+
+  try {
+    const phone = phoneNumber("loginCountry", "loginPhone");
+    const password = $("loginPassword").value;
+
+    const { data, error } = await db.auth.signInWithPassword({
+      phone,
+      password
+    });
+
+    if (error) throw error;
+
+    showDashboard(data.user);
+  } catch (error) {
+    message(friendlyError(error), true);
+  } finally {
+    button.disabled = false;
+  }
+});
+
+async function logout() {
+  if (!db) return;
+
+  const { error } = await db.auth.signOut();
+
+  if (error) {
+    return message(friendlyError(error), true);
+  }
+
+  showRegister();
+  message("Vous êtes déconnecté.");
+}
+
+async function restoreSession() {
+  if (!db) return;
+
+  const { data } = await db.auth.getSession();
+
+  if (data.session) {
+    showDashboard(data.session.user);
+  }
+}
+
+restoreSession();
+</script>
+
+</body>
+</html>
