@@ -26,6 +26,7 @@ body{
 }
 button,input,select{font:inherit}
 button{cursor:pointer}
+button:disabled{opacity:.6;cursor:not-allowed}
 header{
   background:#210e03;
   border-bottom:2px solid var(--or);
@@ -45,24 +46,6 @@ header{
   padding:12px 15px;
   font-weight:bold;
 }
-button:disabled{opacity:.6;cursor:not-allowed}
-nav{
-  display:flex;
-  overflow-x:auto;
-  background:#1c0d03;
-  border-bottom:1px solid var(--bordure);
-}
-nav button{
-  flex-shrink:0;
-  min-width:90px;
-  padding:13px 8px;
-  border:0;
-  border-right:1px solid #67440e;
-  color:var(--or2);
-  background:transparent;
-  font-size:13px;
-}
-nav button.active{background:#6a4007;color:white}
 main{max-width:1100px;margin:auto;padding:12px}
 .carousel{
   position:relative;
@@ -88,7 +71,8 @@ main{max-width:1100px;margin:auto;padding:12px}
   background:#1b0c02d9;color:white;
   padding:9px 13px;font-size:20px;
 }
-.prev{left:8px}.next{right:8px}
+.prev{left:8px}
+.next{right:8px}
 .dots{text-align:center;padding:8px}
 .dot{
   width:9px;height:9px;border-radius:50%;
@@ -122,7 +106,10 @@ input,select{
 }
 .full{width:100%;margin-top:10px}
 .small{font-size:12px;line-height:1.6;color:#e5d2ac}
-.notice{padding:12px;border-radius:9px;margin:10px 0;display:none;line-height:1.5;overflow-wrap:anywhere}
+.notice{
+  padding:12px;border-radius:9px;margin:10px 0;
+  display:none;line-height:1.5;overflow-wrap:anywhere
+}
 .notice.ok{display:block;background:#163c20;color:#caffd0}
 .notice.err{display:block;background:#501515;color:#ffd0d0}
 .pill{
@@ -133,26 +120,28 @@ input,select{
 .hidden{display:none!important}
 .vip-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));
   gap:12px;
 }
 .vip-card{text-align:center}
 .vip-card h3{color:var(--or);font-size:21px}
 .vip-price{font-size:22px;font-weight:bold;color:var(--or2)}
+.vip-info{
+  border-top:1px solid #79500e;
+  margin-top:12px;padding-top:8px;
+  text-align:left;font-size:13px;line-height:1.8;
+}
+.vip-info strong{color:var(--or2)}
 .shortcut-grid{
   display:grid;grid-template-columns:repeat(4,1fr);gap:8px;
 }
 .shortcut{
   background:#321a06;border:1px solid var(--bordure);
-  color:#ffe7a1;border-radius:10px;padding:13px 4px;
-  text-align:center;font-size:12px;
+  color:#ffe7a1;border-radius:10px;padding:15px 4px;
+  text-align:center;font-size:13px;
 }
+.shortcut:active{background:#6a4007}
 .balance{font-size:27px;color:var(--or);font-weight:bold}
-footer{
-  padding:22px 12px;text-align:center;
-  border-top:1px solid var(--bordure);
-  margin-top:25px;font-size:12px;color:#dfcba5;
-}
 .bottom-nav{
   position:sticky;bottom:0;z-index:5;
   display:flex;justify-content:space-around;
@@ -161,9 +150,15 @@ footer{
 }
 .bottom-nav button{
   flex:1;border:0;background:transparent;
-  color:#ffe4a0;font-size:12px;padding:7px 2px;
+  color:#ffe4a0;font-size:11px;padding:7px 2px;
 }
+.bottom-nav button.active{color:#fff;background:#51300a;border-radius:8px}
 .bottom-nav span{display:block;font-size:20px;margin-bottom:4px}
+footer{
+  padding:22px 12px;text-align:center;
+  border-top:1px solid var(--bordure);
+  margin-top:25px;font-size:12px;color:#dfcba5;
+}
 @media(max-width:500px){
   header{padding:12px 9px}
   .logo{font-size:17px}
@@ -183,68 +178,70 @@ footer{
   <button class="header-button" onclick="showSection('auth')">Connexion</button>
 </header>
 
-<nav>
-  <button class="active" onclick="showSection('home',this)">🏠 Maison</button>
-  <button onclick="showSection('vip',this)">💎 VIP</button>
-  <button onclick="showSection('bassin',this)">🪙 Mon compte</button>
-  <button onclick="showSection('minier',this)">⛏ Minier</button>
-  <button onclick="showSection('parrainage',this)">👥 Parrainage</button>
-  <button onclick="showSection('depot',this)">💳 Dépôt</button>
-  <button onclick="showSection('retrait',this)">🏧 Retrait</button>
-</nav>
-
 <main>
 
+<!-- ACCUEIL ET PHOTOS -->
 <section id="carousel-section">
   <div class="carousel">
     <div class="slide active">
       <img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=1200&q=80" alt="Blockchain">
       <div class="slide-caption">ETHBTC-USDT · Bienvenue</div>
     </div>
+
     <div class="slide">
       <img src="https://images.unsplash.com/photo-1518546305927-5a555bb7020d?auto=format&fit=crop&w=1200&q=80" alt="Crypto-monnaies">
       <div class="slide-caption">Votre espace numérique</div>
     </div>
+
     <div class="slide">
       <img src="https://images.unsplash.com/photo-1621761191319-c6fb62004040?auto=format&fit=crop&w=1200&q=80" alt="Bitcoin">
       <div class="slide-caption">Découvrez les fonctionnalités</div>
     </div>
+
     <div class="slide">
       <img src="https://images.unsplash.com/photo-1639322537228-f710d846310a?auto=format&fit=crop&w=1200&q=80" alt="Réseau numérique">
       <div class="slide-caption">Explorez votre espace membre</div>
     </div>
-    <div class="slide">
-      <img src="https://images.unsplash.com/photo-1640340434855-6084b1f4901c?auto=format&fit=crop&w=1200&q=80" alt="Marchés numériques">
-      <div class="slide-caption">Consultez vos opérations</div>
-    </div>
-    <div class="slide">
-      <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1200&q=80" alt="Graphique financier">
-      <div class="slide-caption">La transparence avant tout</div>
-    </div>
+
     <button class="carousel-control prev" onclick="moveSlide(-1)" aria-label="Photo précédente">‹</button>
     <button class="carousel-control next" onclick="moveSlide(1)" aria-label="Photo suivante">›</button>
   </div>
   <div class="dots" id="dots"></div>
 </section>
 
+<!-- PAGE D'ACCUEIL -->
 <section id="home" class="page">
   <h2 class="section-title">Bienvenue sur ETHBTC-USDT</h2>
-  <p>Créez un compte ou connectez-vous pour accéder à votre espace personnel.</p>
+  <p>Accédez rapidement aux services de votre espace membre.</p>
 
   <div class="shortcut-grid">
+    <button class="shortcut" onclick="showSection('depot')">💳<br>Recharge</button>
+    <button class="shortcut" onclick="showSection('retrait')">🏧<br>Retrait</button>
+    <button class="shortcut" onclick="showSection('parrainage')">👥<br>Inviter</button>
     <button class="shortcut" onclick="showSection('vip')">💎<br>VIP</button>
+    <button class="shortcut" onclick="showSection('minier')">⛏️<br>Minier</button>
     <button class="shortcut" onclick="showSection('bassin')">🪙<br>Mon compte</button>
-    <button class="shortcut" onclick="showSection('minier')">⛏<br>Minier</button>
-    <button class="shortcut" onclick="showSection('parrainage')">👥<br>Parrainage</button>
+    <button class="shortcut" onclick="showSection('faq')">❓<br>FAQ</button>
+    <button class="shortcut" onclick="showSection('activite')">📋<br>Activité</button>
   </div>
 
   <div class="card" style="margin-top:15px">
     <h2>Votre espace personnel</h2>
     <p id="home-status">Vous n'êtes pas encore connecté.</p>
-    <button class="gold-button" onclick="showSection('auth')">Créer un compte / Se connecter</button>
+    <button class="gold-button full" onclick="showSection('auth')">Créer un compte / Se connecter</button>
+  </div>
+
+  <div class="card" style="margin-top:15px">
+    <h2>Information importante</h2>
+    <p class="small">
+      Vérifiez toujours les conditions et les risques avant d'effectuer un paiement.
+      Une demande de dépôt ne constitue pas une confirmation de paiement.
+      Aucun rendement financier n'est garanti.
+    </p>
   </div>
 </section>
 
+<!-- INSCRIPTION ET CONNEXION -->
 <section id="auth" class="page hidden">
   <div class="auth-grid">
 
@@ -293,25 +290,27 @@ footer{
         </div>
 
         <div class="field">
-          <label for="reg-password">Mot de passe (6 à 8 chiffres)</label>
-          <input id="reg-password" type="password" inputmode="numeric" pattern="[0-9]{6,8}" minlength="6" maxlength="8" required autocomplete="new-password">
-          <div class="small">Pour votre sécurité, évitez un code facile à deviner.</div>
+          <label for="reg-password">Mot de passe</label>
+          <input id="reg-password" type="password" minlength="6" maxlength="72" required autocomplete="new-password">
+          <div class="small">Utilisez un mot de passe fort, pas votre code PIN mobile money.</div>
         </div>
 
         <div class="field">
           <label for="confirm-password">Confirmer le mot de passe</label>
-          <input id="confirm-password" type="password" inputmode="numeric" pattern="[0-9]{6,8}" minlength="6" maxlength="8" required autocomplete="new-password">
+          <input id="confirm-password" type="password" minlength="6" maxlength="72" required autocomplete="new-password">
         </div>
 
         <div class="field">
           <label for="referral-input">Code de parrainage (facultatif)</label>
-          <input id="referral-input" type="text" maxlength="30">
+          <input id="referral-input" type="text" maxlength="30" autocomplete="off">
         </div>
 
         <button class="gold-button full" id="register-button" type="submit">Créer mon compte</button>
       </form>
 
-      <p class="small">La création de compte par téléphone nécessite que l'authentification téléphonique et le fournisseur SMS soient configurés dans Supabase.</p>
+      <p class="small">
+        L'inscription par téléphone nécessite que l'authentification téléphonique et le fournisseur SMS soient configurés dans Supabase.
+      </p>
     </div>
 
     <div class="card">
@@ -349,18 +348,19 @@ footer{
 
         <div class="field">
           <label for="login-phone">Numéro de téléphone</label>
-          <input id="login-phone" type="tel" required>
+          <input id="login-phone" type="tel" required autocomplete="tel">
         </div>
 
         <div class="field">
           <label for="login-password">Mot de passe</label>
-          <input id="login-password" type="password" minlength="6" maxlength="8" required autocomplete="current-password">
+          <input id="login-password" type="password" minlength="6" required autocomplete="current-password">
         </div>
 
         <button class="gold-button full" id="login-button" type="submit">Se connecter</button>
       </form>
 
       <hr style="border-color:#79500e;margin:20px 0">
+
       <h2>Vérification SMS</h2>
       <p class="small">Si un code vous a été envoyé lors de l'inscription, saisissez-le ici.</p>
 
@@ -369,63 +369,93 @@ footer{
           <label for="verify-phone">Téléphone complet</label>
           <input id="verify-phone" type="tel" placeholder="+243970000000" required>
         </div>
+
         <div class="field">
           <label for="sms-code">Code reçu par SMS</label>
           <input id="sms-code" type="text" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" required>
         </div>
+
         <button class="gold-button full" type="submit">Confirmer le SMS</button>
       </form>
     </div>
   </div>
 </section>
 
+<!-- VIP -->
 <section id="vip" class="page hidden">
   <h2 class="section-title">Niveaux VIP</h2>
-  <p class="small">Les informations proviennent de la base de données. Aucun rendement n'est garanti. Vérifiez les risques avant tout versement.</p>
+  <p class="small">
+    Les niveaux sont chargés depuis la base de données. Les rendements affichés ne constituent pas une garantie de gains.
+  </p>
+
   <div id="vip-list" class="vip-grid">
     <div class="card">Chargement des VIP…</div>
   </div>
 </section>
 
+<!-- MON COMPTE -->
 <section id="bassin" class="page hidden">
   <h2 class="section-title">Mon compte</h2>
+
   <div class="card">
     <p>Nom : <strong id="profile-name">—</strong></p>
     <p>Téléphone : <strong id="profile-phone">—</strong></p>
-    <p>Mon code de parrainage :</p>
+    <p>Code de parrainage :</p>
     <div class="pill" id="my-referral">Connectez-vous</div>
-    <p class="small">Le code affiché doit être enregistré dans la base avant de pouvoir être utilisé comme code officiel.</p>
+    <p class="small">
+      Le code officiel doit être enregistré dans la base de données pour être accepté par le système de parrainage.
+    </p>
+    <button class="gold-button full" onclick="copyReferral()">Copier mon code</button>
+  </div>
+
+  <div class="card" style="margin-top:12px">
+    <h2>État du compte</h2>
+    <p id="connection-status">Connexion à Supabase…</p>
+    <button id="logout-button" class="gold-button full hidden" onclick="logout()">Se déconnecter</button>
   </div>
 </section>
 
+<!-- ESPACE MINIER -->
 <section id="minier" class="page hidden">
   <h2 class="section-title">Espace minier</h2>
+
   <div class="card">
     <p id="mining-status">Connectez-vous pour consulter les informations de votre compte.</p>
-    <p class="small">Les récupérations de gains doivent être validées côté serveur. Cette page ne simule pas de paiement.</p>
-    <button class="gold-button" onclick="loadMining()">Actualiser</button>
+    <button class="gold-button full" onclick="loadMining()">Actualiser</button>
+    <p class="small">
+      Les gains éventuels doivent être calculés et validés côté serveur. Cette page ne simule aucun paiement.
+    </p>
   </div>
 </section>
 
+<!-- ÉQUIPE / PARRAINAGE -->
 <section id="parrainage" class="page hidden">
-  <h2 class="section-title">Parrainage</h2>
+  <h2 class="section-title">Équipe et parrainage</h2>
+
   <div class="card">
+    <h2>Invitez vos amis</h2>
     <p>Votre code personnel :</p>
     <div class="pill" id="referral-display">Connectez-vous d'abord</div>
-    <p class="small">Le code de secours affiché n'est pas nécessairement enregistré dans la base de données.</p>
-    <button class="gold-button" onclick="copyReferral()">Copier mon code</button>
+    <button class="gold-button full" onclick="copyReferral()">Copier mon code</button>
+    <p class="small">
+      Le code de secours généré dans le navigateur n'est pas un code officiel enregistré dans la base.
+    </p>
   </div>
 </section>
 
+<!-- DÉPÔT / RECHARGE -->
 <section id="depot" class="page hidden">
-  <h2 class="section-title">Demande de dépôt</h2>
+  <h2 class="section-title">Recharge / Dépôt</h2>
+
   <div class="card">
     <div id="deposit-message" class="notice" role="status"></div>
+
     <form id="deposit-form">
       <div class="field">
         <label for="deposit-amount">Montant en USDT</label>
         <input id="deposit-amount" type="number" min="0.01" step="0.01" required>
       </div>
+
       <div class="field">
         <label for="deposit-method">Réseau ou méthode</label>
         <select id="deposit-method" required>
@@ -434,25 +464,34 @@ footer{
           <option value="Airtel Money">Airtel Money</option>
         </select>
       </div>
+
       <div class="field">
         <label for="deposit-reference">Référence de transaction (facultatif)</label>
         <input id="deposit-reference" maxlength="150">
       </div>
-      <p class="small">Une demande ne confirme pas un paiement et ne modifie pas votre solde.</p>
-      <button class="gold-button full" type="submit">Envoyer la demande</button>
+
+      <p class="small">
+        Cette demande ne confirme pas le paiement et ne modifie pas votre solde.
+      </p>
+
+      <button class="gold-button full" type="submit">Envoyer la demande de recharge</button>
     </form>
   </div>
 </section>
 
+<!-- RETRAIT -->
 <section id="retrait" class="page hidden">
-  <h2 class="section-title">Demande de retrait</h2>
+  <h2 class="section-title">Retrait</h2>
+
   <div class="card">
     <div id="withdraw-message" class="notice" role="status"></div>
+
     <form id="withdraw-form">
       <div class="field">
         <label for="withdraw-amount">Montant en USDT</label>
         <input id="withdraw-amount" type="number" min="0.01" step="0.01" required>
       </div>
+
       <div class="field">
         <label for="withdraw-method">Réseau</label>
         <select id="withdraw-method" required>
@@ -460,30 +499,78 @@ footer{
           <option value="USDT_TRC20">USDT TRC20</option>
         </select>
       </div>
+
       <div class="field">
         <label for="withdraw-destination">Adresse du portefeuille</label>
         <input id="withdraw-destination" required maxlength="200">
       </div>
-      <p class="small">La demande sera en attente de vérification. Aucun transfert n'est effectué par ce formulaire.</p>
-      <button class="gold-button full" type="submit">Envoyer la demande</button>
+
+      <p class="small">
+        La demande restera en attente de vérification. Aucun transfert n'est effectué par ce formulaire.
+      </p>
+
+      <button class="gold-button full" type="submit">Envoyer la demande de retrait</button>
     </form>
   </div>
 </section>
 
-<section class="card" style="margin-top:20px">
-  <h2>État de connexion</h2>
-  <p id="connection-status">Connexion à Supabase…</p>
-  <button id="logout-button" class="gold-button hidden" onclick="logout()">Se déconnecter</button>
+<!-- FAQ -->
+<section id="faq" class="page hidden">
+  <h2 class="section-title">Questions fréquentes</h2>
+
+  <div class="card">
+    <h3>Comment créer un compte ?</h3>
+    <p class="small">Ouvrez la section « Mon compte », puis choisissez « Créer un compte ». La vérification SMS peut être nécessaire.</p>
+  </div>
+
+  <div class="card" style="margin-top:12px">
+    <h3>Quand mon dépôt est-il confirmé ?</h3>
+    <p class="small">Une demande de dépôt est d'abord en attente. Le paiement doit être vérifié avant toute modification du solde.</p>
+  </div>
+
+  <div class="card" style="margin-top:12px">
+    <h3>Les rendements sont-ils garantis ?</h3>
+    <p class="small">Non. Tout investissement comporte des risques de perte. Vérifiez l'identité de l'opérateur et les conditions avant de verser de l'argent.</p>
+  </div>
+
+  <div class="card" style="margin-top:12px">
+    <h3>Comment fonctionne le retrait ?</h3>
+    <p class="small">Envoyez une demande avec le montant et l'adresse de destination. La demande doit être examinée séparément.</p>
+  </div>
+</section>
+
+<!-- ACTIVITÉ -->
+<section id="activite" class="page hidden">
+  <h2 class="section-title">Mes activités</h2>
+
+  <div class="card">
+    <p id="activity-status">Connectez-vous pour consulter vos activités.</p>
+    <p class="small">
+      Cette page affiche un état général. Pour afficher un historique complet, il faut connecter les tables d'opérations et leurs règles d'accès.
+    </p>
+    <button class="gold-button full" onclick="refreshActivity()">Actualiser</button>
+  </div>
 </section>
 
 </main>
 
+<!-- NAVIGATION DU BAS -->
 <div class="bottom-nav">
-  <button onclick="showSection('home')"><span>🏠</span>Maison</button>
-  <button onclick="showSection('vip')"><span>💎</span>VIP</button>
-  <button onclick="showSection('bassin')"><span>🪙</span>Compte</button>
-  <button onclick="showSection('minier')"><span>⛏️</span>Minier</button>
-  <button onclick="showSection('auth')"><span>👤</span>Moi</button>
+  <button class="active" data-page="home" onclick="showSection('home',this)">
+    <span>🏠</span>Accueil
+  </button>
+  <button data-page="vip" onclick="showSection('vip',this)">
+    <span>💎</span>VIP
+  </button>
+  <button data-page="minier" onclick="showSection('minier',this)">
+    <span>⛏️</span>Minier
+  </button>
+  <button data-page="parrainage" onclick="showSection('parrainage',this)">
+    <span>👥</span>Équipe
+  </button>
+  <button data-page="bassin" onclick="showSection('bassin',this)">
+    <span>👤</span>Mon compte
+  </button>
 </div>
 
 <footer>
@@ -506,7 +593,7 @@ let currentProfile = null;
 let slideIndex = 0;
 let slideTimer = null;
 
-/* AFFICHAGE DES MESSAGES */
+/* MESSAGES */
 function message(id, text, type = "ok") {
   const el = document.getElementById(id);
   if (!el) return;
@@ -521,6 +608,10 @@ function clearMessage(id) {
   el.textContent = "";
 }
 
+function readableError(error) {
+  return error?.message || "Une erreur est survenue.";
+}
+
 /* NAVIGATION */
 function showSection(name, button) {
   document.querySelectorAll(".page").forEach(section => {
@@ -530,15 +621,14 @@ function showSection(name, button) {
   const section = document.getElementById(name);
   if (section) section.classList.remove("hidden");
 
-  document.querySelectorAll("nav button").forEach(btn => {
-    btn.classList.remove("active");
+  document.querySelectorAll(".bottom-nav button").forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.page === name);
   });
-
-  if (button) button.classList.add("active");
 
   if (name === "vip") loadVIP();
   if (name === "bassin" || name === "parrainage") refreshProfile();
   if (name === "minier") loadMining();
+  if (name === "activite") refreshActivity();
 
   window.scrollTo({top:0,behavior:"smooth"});
 }
@@ -617,8 +707,8 @@ document.getElementById("register-form").addEventListener("submit", async event 
     return;
   }
 
-  if (!/^\d{6,8}$/.test(password)) {
-    message("register-message", "Le mot de passe doit contenir 6 à 8 chiffres.", "err");
+  if (password.length < 6) {
+    message("register-message", "Le mot de passe doit contenir au moins 6 caractères.", "err");
     return;
   }
 
@@ -632,12 +722,13 @@ document.getElementById("register-form").addEventListener("submit", async event 
 
   try {
     const {data, error} = await db.auth.signUp({
-      phone: phone,
-      password: password,
+      phone,
+      password,
       options: {
         data: {
           full_name: name,
-          referral_code_entered: referral || null
+          referral_code_entered: referral || null,
+          country_code: country
         }
       }
     });
@@ -651,14 +742,11 @@ document.getElementById("register-form").addEventListener("submit", async event 
       await loadProfile();
       updateConnectionUI();
 
-      message(
-        "register-message",
-        "Compte créé et session ouverte. Vérifiez votre profil."
-      );
+      message("register-message", "Compte créé. Vérifiez votre profil.");
     } else {
       message(
         "register-message",
-        "Demande envoyée. Si Supabase demande une vérification SMS, saisissez le code ci-dessous. Si aucun SMS n'arrive, vérifiez la configuration SMS de Supabase."
+        "Demande envoyée. Si la vérification SMS est activée, saisissez le code reçu ci-dessous."
       );
     }
   } catch (error) {
@@ -672,13 +760,12 @@ document.getElementById("register-form").addEventListener("submit", async event 
 /* VÉRIFICATION SMS */
 document.getElementById("verify-form").addEventListener("submit", async event => {
   event.preventDefault();
-  clearMessage("register-message");
 
   const phone = document.getElementById("verify-phone").value.trim();
   const token = document.getElementById("sms-code").value.trim();
 
   if (!/^\+[1-9]\d{7,14}$/.test(phone) || !/^\d{6}$/.test(token)) {
-    message("register-message", "Vérifiez le numéro complet et le code à 6 chiffres.", "err");
+    message("register-message", "Vérifiez le numéro complet et le code SMS à 6 chiffres.", "err");
     return;
   }
 
@@ -712,6 +799,7 @@ document.getElementById("login-form").addEventListener("submit", async event => 
     document.getElementById("login-country").value,
     document.getElementById("login-phone").value
   );
+
   const password = document.getElementById("login-password").value;
   const button = document.getElementById("login-button");
 
@@ -746,12 +834,6 @@ document.getElementById("login-form").addEventListener("submit", async event => 
   }
 });
 
-/* MESSAGE D'ERREUR */
-function readableError(error) {
-  const text = error && error.message ? error.message : "Une erreur est survenue.";
-  return text;
-}
-
 /* PROFIL */
 async function loadProfile() {
   if (!currentUser) return;
@@ -774,11 +856,6 @@ async function loadProfile() {
 
     const phone = currentUser.phone || currentProfile?.phone || "—";
 
-    /*
-      Le code de secours ci-dessous est calculé dans le navigateur.
-      Pour qu'il soit officiel et accepté lors d'une inscription,
-      il doit être créé et enregistré côté serveur dans profiles.
-    */
     const referralCode =
       currentProfile?.referral_code ||
       ("ETH" + currentUser.id.replace(/-/g, "").slice(0, 10).toUpperCase());
@@ -789,14 +866,15 @@ async function loadProfile() {
     document.getElementById("referral-display").textContent = referralCode;
   } catch (error) {
     console.error("Erreur de profil :", error);
+
     document.getElementById("profile-name").textContent =
       currentUser.user_metadata?.full_name || "Membre";
+
     document.getElementById("profile-phone").textContent =
       currentUser.phone || "—";
-    document.getElementById("my-referral").textContent =
-      "Profil indisponible";
-    document.getElementById("referral-display").textContent =
-      "Profil indisponible";
+
+    document.getElementById("my-referral").textContent = "Profil indisponible";
+    document.getElementById("referral-display").textContent = "Profil indisponible";
   }
 }
 
@@ -837,6 +915,7 @@ async function logout() {
 
     currentUser = null;
     currentProfile = null;
+
     updateConnectionUI();
 
     document.getElementById("profile-name").textContent = "Connectez-vous";
@@ -850,15 +929,10 @@ async function logout() {
   }
 }
 
-/* NIVEAUX VIP */
+/* CHARGEMENT DES VIP */
 async function loadVIP() {
   const container = document.getElementById("vip-list");
-  container.textContent = "";
-
-  const loading = document.createElement("div");
-  loading.className = "card";
-  loading.textContent = "Chargement des niveaux VIP…";
-  container.appendChild(loading);
+  container.textContent = "Chargement des niveaux VIP…";
 
   try {
     const {data, error} = await db
@@ -893,34 +967,54 @@ async function loadVIP() {
         ? Number(vip.price).toLocaleString("fr-FR") + " USDT"
         : "Prix à confirmer";
 
-      const minimum = document.createElement("p");
-      minimum.textContent = vip.min_amount != null
-        ? "Minimum : " + vip.min_amount + " USDT"
-        : "";
+      const info = document.createElement("div");
+      info.className = "vip-info";
 
-      const maximum = document.createElement("p");
-      maximum.textContent = vip.max_amount != null
-        ? "Maximum : " + vip.max_amount + " USDT"
-        : "";
+      const minText = vip.min_amount != null
+        ? Number(vip.min_amount).toFixed(2) + " USDT"
+        : "À confirmer";
+
+      const maxText = vip.max_amount != null
+        ? Number(vip.max_amount).toFixed(2) + " USDT"
+        : "À confirmer";
+
+      const rate = vip.daily_return_percent != null
+        ? Number(vip.daily_return_percent).toFixed(2) + "%"
+        : "À confirmer";
+
+      info.innerHTML =
+        "<div>Montant de la recharge : <strong></strong></div>" +
+        "<div>Revenus miniers : <strong></strong></div>" +
+        "<div>Temps d'exploitation : <strong>À confirmer</strong></div>";
+
+      info.children[0].querySelector("strong").textContent =
+        minText + " ~ " + maxText;
+
+      info.children[1].querySelector("strong").textContent = rate;
 
       const btn = document.createElement("button");
       btn.className = "gold-button full";
-      btn.textContent = "Choisir ce niveau";
+      btn.textContent = "Recharger / Activer VIP";
 
       btn.addEventListener("click", () => {
         if (!currentUser) {
           showSection("auth");
-          alert("Connectez-vous pour continuer.");
+          alert("Connectez-vous avant de continuer.");
           return;
         }
 
-        alert(
-          "Le niveau " + (vip.name || vip.level) +
-          " est affiché, mais son achat et son activation nécessitent un paiement vérifié et une validation sécurisée côté serveur."
+        document.getElementById("deposit-amount").value =
+          vip.min_amount != null ? Number(vip.min_amount).toFixed(2) : "";
+
+        showSection("depot");
+
+        message(
+          "deposit-message",
+          "Choisissez votre méthode de paiement et envoyez la demande. L'activation du VIP nécessite une validation du paiement par l'administrateur."
         );
       });
 
-      card.append(title, description, price, minimum, maximum, btn);
+      card.append(title, description, price, info, btn);
       container.appendChild(card);
     });
   } catch (error) {
@@ -930,7 +1024,7 @@ async function loadVIP() {
   }
 }
 
-/* BASSIN MINIER : APPEL SÉCURISÉ À LA FONCTION EXISTANTE */
+/* ESPACE MINIER */
 async function loadMining() {
   const el = document.getElementById("mining-status");
 
@@ -955,7 +1049,7 @@ async function loadMining() {
 
     el.textContent =
       "Vous avez " + data.length +
-      " niveau(x) VIP actif(s). La récupération des récompenses doit être validée par la fonction sécurisée du serveur.";
+      " niveau(x) VIP actif(s). Les opérations doivent être vérifiées côté serveur.";
   } catch (error) {
     console.error("Erreur minière :", error);
     el.textContent =
@@ -963,7 +1057,7 @@ async function loadMining() {
   }
 }
 
-/* PARRAINAGE : COPIE */
+/* COPIER CODE DE PARRAINAGE */
 async function copyReferral() {
   const code = document.getElementById("referral-display").textContent;
 
@@ -985,9 +1079,7 @@ async function copyReferral() {
   }
 }
 
-/* DEMANDE DE DÉPÔT
-   La table existante utilise la colonne network.
-*/
+/* DÉPÔT */
 document.getElementById("deposit-form").addEventListener("submit", async event => {
   event.preventDefault();
   clearMessage("deposit-message");
@@ -1009,9 +1101,9 @@ document.getElementById("deposit-form").addEventListener("submit", async event =
   try {
     const {error} = await db.from("deposit_requests").insert({
       user_id: currentUser.id,
-      amount: amount,
+      amount,
       currency: "USDT",
-      network: network,
+      network,
       transaction_reference: reference || null,
       status: "pending"
     });
@@ -1028,16 +1120,14 @@ document.getElementById("deposit-form").addEventListener("submit", async event =
     console.error("Erreur dépôt :", error);
     message(
       "deposit-message",
-      "Demande non enregistrée. Vérifiez les règles RLS et les colonnes de deposit_requests. Détail : " +
+      "Demande non enregistrée. Vérifiez les règles RLS et les colonnes de deposit_requests. " +
       readableError(error),
       "err"
     );
   }
 });
 
-/* DEMANDE DE RETRAIT
-   La table existante utilise network et destination_address.
-*/
+/* RETRAIT */
 document.getElementById("withdraw-form").addEventListener("submit", async event => {
   event.preventDefault();
   clearMessage("withdraw-message");
@@ -1059,9 +1149,9 @@ document.getElementById("withdraw-form").addEventListener("submit", async event 
   try {
     const {error} = await db.from("withdrawal_requests").insert({
       user_id: currentUser.id,
-      amount: amount,
+      amount,
       currency: "USDT",
-      network: network,
+      network,
       destination_address: destination,
       status: "pending"
     });
@@ -1078,12 +1168,25 @@ document.getElementById("withdraw-form").addEventListener("submit", async event 
     console.error("Erreur retrait :", error);
     message(
       "withdraw-message",
-      "Demande non enregistrée. Vérifiez les règles RLS et les colonnes de withdrawal_requests. Détail : " +
+      "Demande non enregistrée. Vérifiez les règles RLS et les colonnes de withdrawal_requests. " +
       readableError(error),
       "err"
     );
   }
 });
+
+/* ACTIVITÉ */
+async function refreshActivity() {
+  const el = document.getElementById("activity-status");
+
+  if (!currentUser) {
+    el.textContent = "Connectez-vous pour consulter vos activités.";
+    return;
+  }
+
+  el.textContent =
+    "Compte connecté. L'historique détaillé nécessite des requêtes vers les tables d'opérations autorisées.";
+}
 
 /* INITIALISATION */
 async function init() {
@@ -1107,9 +1210,7 @@ async function init() {
       updateConnectionUI();
 
       if (currentUser) {
-        setTimeout(() => {
-          loadProfile();
-        }, 0);
+        setTimeout(() => loadProfile(), 0);
       }
     });
   } catch (error) {
