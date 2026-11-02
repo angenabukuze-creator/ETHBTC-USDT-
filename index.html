@@ -72,7 +72,18 @@ th,td{border:1px solid #79500e;padding:8px;text-align:left}
 th{color:var(--or2);background:#321a06}
 td{overflow-wrap:anywhere}
 .admin-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
-@media(max-width:500px){header{padding:12px 9px}.logo{font-size:17px}.slide{height:160px}.commission-box strong{font-size:21px}.admin-actions{grid-template-columns:1fr}}
+.asset-grid{display:grid;grid-template-columns:1fr;gap:10px}
+.asset-box{background:#1b0d03;border:1px solid #79500e;border-radius:12px;padding:15px}
+.asset-box span{display:block;color:#ffe9a0;font-size:13px}
+.asset-box strong{display:block;color:var(--or);font-size:25px;margin-top:8px;overflow-wrap:anywhere}
+.mining-summary{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.mining-panel{background:#1b0d03;border:1px solid #79500e;border-radius:12px;padding:14px}
+.mining-panel .label{color:#ffe9a0;font-size:13px}
+.mining-panel .value{font-size:23px;color:var(--or);font-weight:bold;margin-top:8px}
+.mining-record{background:#1b0d03;border:1px solid #79500e;border-radius:10px;padding:12px;margin:10px 0}
+.mining-record .record-row{display:flex;justify-content:space-between;gap:10px;padding:5px 0;font-size:13px}
+.mining-record .record-row span:first-child{color:#ffe9a0}
+@media(max-width:500px){header{padding:12px 9px}.logo{font-size:17px}.slide{height:160px}.commission-box strong{font-size:21px}.admin-actions{grid-template-columns:1fr}.mining-summary{grid-template-columns:1fr}}
 </style>
 </head>
 
@@ -112,6 +123,26 @@ td{overflow-wrap:anywhere}
       <button class="shortcut" type="button" onclick="openFeature('activite')"><span class="icon">📊</span>Activité</button>
       <button class="shortcut" type="button" onclick="openFeature('minier')"><span class="icon">⛏️</span>Bassin minier</button>
     </div>
+  </div>
+
+  <div class="card">
+    <h2>Mes actifs</h2>
+    <div class="asset-grid">
+      <div class="asset-box">
+        <span>Total des actifs</span>
+        <strong id="asset-total">$0.00</strong>
+      </div>
+      <div class="asset-box">
+        <span>Portefeuille d'investissement</span>
+        <strong id="asset-investment">$0.00</strong>
+      </div>
+      <div class="asset-box">
+        <span>Portefeuille de courtage / retirable</span>
+        <strong id="asset-withdrawable">$0.00</strong>
+      </div>
+    </div>
+    <p class="small">Les montants affichés dépendent des soldes confirmés dans votre compte.</p>
+    <button class="gold-button full" type="button" onclick="refreshAssets()">Actualiser les actifs</button>
   </div>
 
   <div class="card">
@@ -188,7 +219,7 @@ td{overflow-wrap:anywhere}
     <h2>Mon compte</h2>
     <p>Nom : <strong id="profile-name">—</strong></p>
     <p>Téléphone : <strong id="profile-phone">—</strong></p>
-    <p>Solde : <strong id="profile-balance">Non disponible</strong></p>
+    <p>Solde retirable : <strong id="profile-balance">Non disponible</strong></p>
     <button class="gold-button full" type="button" onclick="showSection('vip')">Recharger / Voir les VIP</button>
     <button class="gold-button full" type="button" onclick="showSection('retrait')">Demander un retrait</button>
     <button class="gold-button full" type="button" onclick="showSection('parrainage')">Mes invités / Mon équipe</button>
@@ -309,16 +340,32 @@ td{overflow-wrap:anywhere}
 </section>
 
 <section id="minier" class="page hidden">
-  <h2 class="section-title">Bassin minier</h2>
+  <h2 class="section-title">Bassin Minier</h2>
+
   <div class="card">
-    <h2>Mon activité minière</h2>
-    <div class="stat-grid">
-      <div class="stat-box">VIP actifs<div class="stat-number" id="mining-vips">—</div></div>
-      <div class="stat-box">Récompenses enregistrées<div class="stat-number" id="mining-rewards">—</div></div>
+    <h2>Ma puissance minière</h2>
+    <div class="mining-summary">
+      <div class="mining-panel">
+        <div class="label">Puissance minière</div>
+        <div class="value" id="mining-power">0.00 GH/s</div>
+      </div>
+      <div class="mining-panel">
+        <div class="label">Revenu quotidien indicatif</div>
+        <div class="value" id="mining-daily">0.00 USDT</div>
+      </div>
     </div>
-    <p id="mining-status" class="small">Connectez-vous pour consulter vos informations minières.</p>
-    <p class="small">La disponibilité après 24 heures doit être gérée par le serveur. Aucun revenu n'est garanti et seules les récompenses effectivement validées peuvent être distribuées.</p>
-    <button class="gold-button full" type="button" onclick="loadMining()">Actualiser</button>
+    <button class="gold-button full" type="button" onclick="showSection('vip')">Améliorer la puissance de calcul</button>
+    <p id="mining-status" class="small">Connectez-vous pour consulter votre activité minière.</p>
+    <button class="gold-button full" type="button" onclick="loadMining()">Actualiser le bassin minier</button>
+  </div>
+
+  <div class="card">
+    <h2>Registres miniers</h2>
+    <p class="small">Les lignes deviennent récupérables uniquement lorsque le serveur confirme leur disponibilité après 24 heures.</p>
+    <h3>À récupérer</h3>
+    <div id="mining-pending-list"><p class="small">Chargement des registres miniers…</p></div>
+    <h3>Reçu</h3>
+    <div id="mining-received-list"><p class="small">Les revenus déjà récupérés apparaîtront ici.</p></div>
   </div>
 </section>
 
@@ -422,6 +469,7 @@ function escapeHTML(value){
   return String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 }
 function money(value){return Number(value||0).toLocaleString("fr-FR",{minimumFractionDigits:2,maximumFractionDigits:8})+" USDT"}
+function dollars(value){return "$"+Number(value||0).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2})}
 
 function setAuthMode(mode){
   const registering=mode==="register";
@@ -448,6 +496,7 @@ function showSection(name){
   if(name==="retrait")prepareWithdrawalForm();
   if(name==="activite")loadActivity();
   if(name==="administration"){if(adminVerified){loadAdminStats();loadAdminMembers();}else{message("admin-message","Accès administrateur non vérifié.","err");}}
+  if(name==="home")refreshAssets();
   window.scrollTo({top:0,behavior:"smooth"});
 }
 el("header-auth").addEventListener("click",()=>currentUser?showSection("dashboard"):(showSection("auth"),setAuthMode("register")));
@@ -546,6 +595,24 @@ async function loadProfile(){
   el("saved-wallet").value=currentProfile?.withdrawal_wallet||"";
   el("saved-network").value=currentProfile?.withdrawal_network||"";
   updateSignupLink(currentProfile?.referral_code);
+  updateAssetsFromProfile();
+}
+function updateAssetsFromProfile(){
+  const balance=Number(currentProfile?.balance_usdt||0);
+  const investment=Number(currentProfile?.investment_balance_usdt||0);
+  const withdrawable=Number(currentProfile?.withdrawable_balance_usdt??balance);
+  el("asset-total").textContent=dollars(investment+withdrawable);
+  el("asset-investment").textContent=dollars(investment);
+  el("asset-withdrawable").textContent=dollars(withdrawable);
+}
+async function refreshAssets(){
+  if(!currentUser){
+    el("asset-total").textContent="$0.00";
+    el("asset-investment").textContent="$0.00";
+    el("asset-withdrawable").textContent="$0.00";
+    return;
+  }
+  try{await loadProfile()}catch(error){console.warn("Actifs:",error)}
 }
 async function refreshProfile(){if(!currentUser)return;try{await loadProfile()}catch(e){console.warn(e)}}
 function updateSignupLink(code){
@@ -563,12 +630,11 @@ el("profile-form").addEventListener("submit",async e=>{
   e.preventDefault();clearMessage("profile-message");
   if(!currentUser){message("profile-message","Connectez-vous d'abord.","err");return}
   const full_name=el("saved-name").value.trim(),phone=el("saved-phone").value.trim();
-  const withdrawal_wallet=el("saved-wallet").value.trim(),withdrawal_network=el("saved-network").value;
   try{
     const {error}=await db.from("profiles").update({full_name,phone,updated_at:new Date().toISOString()}).eq("id",currentUser.id);
     if(error)throw error;
     await loadProfile();
-    message("profile-message","Informations enregistrées. Le portefeuille de retrait n'est pas modifiable car ses colonnes doivent être confirmées dans la base.");
+    message("profile-message","Informations enregistrées.");
   }catch(error){message("profile-message",readableError(error),"err")}
 });
 async function updateConnectionUI(){
@@ -614,19 +680,130 @@ async function hasActiveVIP(){
   const {data,error}=await db.from("user_vips").select("id").eq("user_id",currentUser.id).eq("status","active").limit(1);
   if(error)throw error;return Array.isArray(data)&&data.length>0;
 }
+
+/* Bassin minier : l'éligibilité et le crédit doivent être validés par Supabase */
+function formatDate(value){
+  if(!value)return "—";
+  const date=new Date(value);
+  return Number.isNaN(date.getTime())?"—":date.toLocaleString("fr-FR",{dateStyle:"short",timeStyle:"medium"});
+}
+function renderMiningRecord(record,received){
+  const box=document.createElement("div");
+  box.className="mining-record";
+  const amount=Number(record.amount??record.reward_amount??0);
+  const created=record.created_at||record.createdAt||record.created_at_server;
+  const available=record.available_at||record.availableAt||record.claimable_at;
+  const status=String(record.status||"pending").toLowerCase();
+  const row=(label,value)=>{
+    const line=document.createElement("div");line.className="record-row";
+    const a=document.createElement("span");a.textContent=label;
+    const b=document.createElement("strong");b.textContent=value;
+    line.append(a,b);box.appendChild(line);
+  };
+  row("Revenu",money(amount));
+  row(received?"Récupéré le":"Enregistré le",formatDate(received?(record.claimed_at||record.received_at||record.updated_at):created));
+  if(!received)row("Disponible à partir de",formatDate(available));
+  row("État",received?"Reçu":status==="available"||status==="claimable"?"À récupérer":"En attente");
+  if(!received){
+    const button=document.createElement("button");
+    button.type="button";button.className="gold-button full";
+    const ready=status==="available"||status==="claimable"||status==="ready";
+    button.textContent=ready?"Récupérer":"Pas encore disponible";
+    button.disabled=!ready;
+    button.addEventListener("click",()=>claimMiningReward(record.id,button));
+    box.appendChild(button);
+  }
+  return box;
+}
 async function loadMining(){
   const target=el("mining-status");
-  if(!currentUser){target.textContent="Connectez-vous pour consulter le Bassin Minier.";return}
+  el("mining-pending-list").textContent="Chargement des registres miniers…";
+  el("mining-received-list").textContent="Chargement des reçus…";
+  if(!currentUser){
+    el("mining-power").textContent="0.00 GH/s";
+    el("mining-daily").textContent="0.00 USDT";
+    target.textContent="Connectez-vous pour consulter votre activité minière.";
+    el("mining-pending-list").textContent="Connectez-vous pour voir vos lignes minières.";
+    el("mining-received-list").textContent="Connectez-vous pour voir vos reçus.";
+    return;
+  }
   try{
-    const {data,error}=await db.from("user_vips").select("id,status,activated_at,expires_at,investment_amount,vip_level_id").eq("user_id",currentUser.id).eq("status","active");
+    const {data:vips,error}=await db.from("user_vips")
+      .select("id,status,activated_at,expires_at,investment_amount,vip_level_id")
+      .eq("user_id",currentUser.id).eq("status","active");
     if(error)throw error;
-    el("mining-vips").textContent=String(data?.length||0);
-    const {data:rewards,error:rewardError}=await db.from("wallet_transactions").select("id,amount").eq("user_id",currentUser.id).eq("transaction_type","mining_reward");
-    if(rewardError)throw rewardError;
-    el("mining-rewards").textContent=money((rewards||[]).reduce((sum,r)=>sum+Number(r.amount||0),0));
-    target.textContent=data?.length?"Vous avez "+data.length+" VIP actif(s). L'heure de disponibilité des revenus doit être contrôlée côté serveur.":"Aucun VIP actif trouvé.";
-  }catch(error){target.textContent="Lecture impossible : "+readableError(error)}
+
+    const activeVips=vips||[];
+    el("mining-power").textContent="0.00 GH/s";
+    el("mining-daily").textContent="0.00 USDT";
+
+    let daily=0,power=0;
+    for(const vip of activeVips){
+      const {data:level,error:levelError}=await db.from("vip_levels")
+        .select("id,daily_return_percent,description")
+        .eq("id",vip.vip_level_id).maybeSingle();
+      if(levelError)continue;
+      const investment=Number(vip.investment_amount||0);
+      daily+=investment*Number(level?.daily_return_percent||0)/100;
+      const match=String(level?.description||"").match(/([\d.]+)\s*GH\/s/i);
+      if(match)power+=Number(match[1]);
+    }
+    el("mining-power").textContent=power.toFixed(2)+" GH/s";
+    el("mining-daily").textContent=money(daily);
+
+    const {data:transactions,error:txError}=await db.from("wallet_transactions")
+      .select("id,amount,transaction_type,created_at,description")
+      .eq("user_id",currentUser.id).eq("transaction_type","mining_reward")
+      .order("created_at",{ascending:false}).limit(100);
+    if(txError)throw txError;
+    const rewards=transactions||[];
+    el("mining-pending-list").textContent="Aucune ligne à récupérer. Les lignes disponibles doivent être créées par le serveur après vérification du délai.";
+    const received=el("mining-received-list");
+    received.textContent="";
+    if(!rewards.length){
+      received.textContent="Aucun revenu minier reçu.";
+    }else{
+      rewards.forEach(r=>{
+        received.appendChild(renderMiningRecord({
+          id:r.id,amount:r.amount,status:"received",
+          created_at:r.created_at,claimed_at:r.created_at,
+          description:r.description
+        },true));
+      });
+    }
+    target.textContent=activeVips.length
+      ? "Puissance et revenus indicatifs affichés. Les récompenses récupérables doivent être fournies et validées par le serveur."
+      : "Aucun VIP actif trouvé. Consultez les options VIP pour découvrir les niveaux disponibles.";
+  }catch(error){
+    target.textContent="Lecture impossible : "+readableError(error);
+    el("mining-pending-list").textContent="Impossible de charger les lignes minières.";
+    el("mining-received-list").textContent="Impossible de charger les reçus.";
+  }
 }
+async function claimMiningReward(rewardId,button){
+  if(!currentUser){alert("Connectez-vous.");return}
+  if(!rewardId){alert("Identifiant de récompense manquant.");return}
+  if(!confirm("Confirmer la récupération de cette récompense minière ?"))return;
+  button.disabled=true;button.textContent="Vérification serveur…";
+  try{
+    /*
+      La récupération doit appeler une fonction RPC transactionnelle dans Supabase.
+      Le serveur doit vérifier l'utilisateur, le délai de 24 heures, l'état de la ligne
+      et empêcher les doubles récupérations avant de créditer le solde retirable.
+      Aucun solde n'est modifié directement depuis le navigateur.
+    */
+    const {data,error}=await db.rpc("claim_mining_reward",{p_reward_id:rewardId});
+    if(error)throw error;
+    alert("Résultat du serveur : "+(typeof data==="string"?data:JSON.stringify(data)));
+    await loadProfile();
+    await loadMining();
+  }catch(error){
+    alert("Récupération impossible : "+readableError(error)+" Vérifiez que la fonction claim_mining_reward existe dans Supabase.");
+  }finally{
+    button.disabled=false;button.textContent="Récupérer";
+  }
+}
+
 async function loadTeamStats(){
   el("team-registered").textContent="…";el("team-validated").textContent="…";el("team-commissions").textContent="…";
   if(!currentUser){el("team-registered").textContent="0";el("team-validated").textContent="0";el("team-commissions").textContent="0";return}
@@ -771,7 +948,6 @@ async function adminSetBlock(blocked){
 }
 function tableForRequests(rows,type){
   if(!rows?.length)return "Aucune demande.";
-  const header=type==="deposit"?"Recharge":"Retrait";
   return "<table><thead><tr><th>ID</th><th>Membre</th><th>Montant</th><th>État</th><th>Actions</th></tr></thead><tbody>"+rows.map(r=>"<tr><td>"+escapeHTML(r.id)+"</td><td>"+escapeHTML(r.user_id)+"</td><td>"+escapeHTML(money(r.amount))+"</td><td>"+escapeHTML(r.status)+"</td><td>"+(r.status==="pending"?"<button class='copy-button' data-approve='"+escapeHTML(r.id)+"'>Approuver</button> <button class='copy-button' data-reject='"+escapeHTML(r.id)+"'>Refuser</button>":"Déjà traité")+"</td></tr>").join("")+"</tbody></table>";
 }
 async function loadAdminDeposits(){
