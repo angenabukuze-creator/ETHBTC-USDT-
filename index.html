@@ -3,642 +3,1179 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ETHBTC-USDT | Espace client</title>
-<meta name="theme-color" content="#2b160e">
+<meta name="theme-color" content="#30180f">
+
+<title>ETHBTC-USDT | Plateforme</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-:root {
-  --bg: #1b100b;
-  --panel: #2c1b13;
-  --panel2: #3b2418;
-  --gold: #e8bd63;
-  --gold2: #ffdf91;
-  --text: #fff7e8;
-  --muted: #cbbca8;
-  --border: #65452d;
-  --green: #7ad6a0;
-  --red: #ff9a90;
+:root{
+  --bg:#160d09;
+  --panel:#291811;
+  --panel2:#382116;
+  --gold:#e7bd65;
+  --gold2:#ffe3a0;
+  --text:#fff7eb;
+  --muted:#c9b8a8;
+  --border:#63452e;
+  --green:#48d597;
+  --red:#ff7777;
 }
-* { box-sizing: border-box; }
-body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--text);
-  font-family: Arial, sans-serif;
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Arial,Helvetica,sans-serif;
 }
-header {
-  padding: 20px 15px;
-  background: linear-gradient(135deg,#3a2114,#17100c);
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  flex-wrap: wrap;
+
+header{
+  padding:18px 14px;
+  background:linear-gradient(120deg,#30180f,#59351c);
+  border-bottom:1px solid var(--gold);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
 }
-.brand { font-size: 23px; font-weight: 800; color: var(--gold2); }
-button, input, select {
-  font: inherit;
-  border-radius: 9px;
-  padding: 12px;
+
+.logo{
+  color:var(--gold2);
+  font-weight:900;
+  font-size:19px;
 }
-button {
-  cursor: pointer;
-  border: 0;
-  background: var(--gold);
-  color: #251308;
-  font-weight: bold;
+
+select,input,button,textarea{
+  font:inherit;
+  border-radius:9px;
+  padding:12px;
 }
-button:disabled { opacity: .5; cursor: wait; }
-.secondary {
-  background: var(--panel2);
-  color: var(--text);
-  border: 1px solid var(--border);
+
+select,input,textarea{
+  width:100%;
+  color:white;
+  background:#1c100b;
+  border:1px solid var(--border);
+  margin:6px 0 12px;
 }
-main { max-width: 1000px; margin: auto; padding: 18px; }
-.card {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 15px;
-  padding: 18px;
-  margin: 12px 0;
-  box-shadow: 0 5px 20px #0002;
+
+button{
+  cursor:pointer;
+  border:0;
+  font-weight:bold;
 }
-h1,h2,h3 { color: var(--gold2); }
-input, select {
-  width: 100%;
-  margin: 6px 0 12px;
-  color: var(--text);
-  background: #1d120d;
-  border: 1px solid var(--border);
+
+.gold-btn{
+  background:linear-gradient(120deg,#c18a35,#ffe3a0);
+  color:#251309;
+  width:100%;
 }
-label { color: var(--muted); font-size: 14px; }
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
-  gap: 12px;
+
+.secondary-btn{
+  background:#493020;
+  color:white;
+  border:1px solid var(--gold);
 }
-nav {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin: 14px 0;
+
+button:disabled{
+  opacity:.5;
+  cursor:not-allowed;
 }
-nav button { flex: 1; min-width: 110px; }
-.hidden { display: none !important; }
-.muted { color: var(--muted); }
-.notice {
-  padding: 12px;
-  background: #402c17;
-  border-radius: 9px;
-  white-space: pre-wrap;
-  overflow-wrap: anywhere;
+
+.container{
+  width:min(1100px,94%);
+  margin:22px auto;
 }
-.good { color: var(--green); }
-.bad { color: var(--red); }
-.amount { font-size: 28px; font-weight: bold; color: var(--gold2); }
-table { width: 100%; border-collapse: collapse; }
-td,th {
-  border-bottom: 1px solid var(--border);
-  padding: 10px 5px;
-  text-align: left;
+
+.card{
+  background:linear-gradient(145deg,var(--panel),#21120d);
+  border:1px solid var(--border);
+  padding:17px;
+  border-radius:15px;
+  margin-bottom:16px;
+  box-shadow:0 8px 25px #0003;
 }
-footer { text-align: center; padding: 25px; color: var(--muted); }
+
+h1,h2,h3{color:var(--gold2)}
+h1{font-size:25px}
+h2{font-size:20px}
+
+p,.muted{color:var(--muted);line-height:1.5}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:14px;
+}
+
+.balance{
+  color:var(--gold2);
+  font-size:27px;
+  font-weight:900;
+}
+
+nav{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-bottom:16px;
+}
+
+nav button{
+  flex:1;
+  min-width:95px;
+  background:#392419;
+  color:white;
+  border:1px solid var(--border);
+}
+
+nav button.active{
+  background:var(--gold);
+  color:#211006;
+}
+
+.hidden{display:none!important}
+
+.notice{
+  padding:12px;
+  border-radius:9px;
+  background:#392719;
+  border:1px solid var(--border);
+  margin:10px 0;
+  overflow-wrap:anywhere;
+}
+
+.success{color:var(--green)}
+.error{color:var(--red)}
+
+.item{
+  padding:12px 0;
+  border-bottom:1px solid var(--border);
+  overflow-wrap:anywhere;
+}
+
+footer{
+  text-align:center;
+  padding:25px;
+  color:var(--muted);
+}
+
+.small{font-size:12px}
+
+a{color:var(--gold2)}
+
+@media(max-width:500px){
+  header{align-items:flex-start}
+  .logo{font-size:17px}
+  h1{font-size:22px}
+}
 </style>
 </head>
 
 <body>
+
 <header>
-  <div class="brand">ETHBTC-USDT</div>
-  <div>
-    <select id="language" aria-label="Langue" style="width:auto;margin:0">
-      <option value="fr">Français</option>
-      <option value="en">English</option>
-    </select>
-  </div>
+  <div class="logo">◆ ETHBTC-USDT</div>
+
+  <select id="language" style="width:120px;margin:0">
+    <option value="fr">Français</option>
+    <option value="en">English</option>
+  </select>
 </header>
 
-<main>
+<main class="container">
+
   <div id="message" class="notice hidden" role="status"></div>
 
-  <section id="authSection">
-    <div class="card">
-      <h1 data-i18n="welcome">Bienvenue sur ETHBTC-USDT</h1>
-      <p class="muted" data-i18n="subtitle">Connectez-vous ou créez votre compte.</p>
+  <!-- AUTHENTIFICATION -->
+  <section id="authSection" class="card">
+    <h1 data-fr="Bienvenue sur ETHBTC-USDT"
+        data-en="Welcome to ETHBTC-USDT">
+      Bienvenue sur ETHBTC-USDT
+    </h1>
 
-      <div class="grid">
-        <div>
-          <h2 data-i18n="login">Connexion</h2>
-          <form id="loginForm">
-            <label for="loginEmail">E-mail</label>
-            <input id="loginEmail" type="email" autocomplete="email" required>
-            <label for="loginPassword" data-i18n="password">Mot de passe</label>
-            <input id="loginPassword" type="password" autocomplete="current-password" required>
-            <button type="submit" data-i18n="login">Connexion</button>
-          </form>
-        </div>
+    <p data-fr="Connectez-vous ou créez votre compte avec votre numéro de téléphone."
+       data-en="Sign in or create your account using your phone number.">
+      Connectez-vous ou créez votre compte avec votre numéro de téléphone.
+    </p>
 
-        <div>
-          <h2 data-i18n="register">Créer un compte</h2>
-          <form id="registerForm">
-            <label data-i18n="fullname">Nom complet</label>
-            <input id="registerName" maxlength="100" autocomplete="name" required>
-            <label for="registerEmail">E-mail</label>
-            <input id="registerEmail" type="email" autocomplete="email" required>
-            <label data-i18n="password">Mot de passe</label>
-            <input id="registerPassword" type="password" minlength="8" autocomplete="new-password" required>
-            <label data-i18n="referral">Code de parrainage (facultatif)</label>
-            <input id="registerReferral" maxlength="30">
-            <button type="submit" data-i18n="register">Créer un compte</button>
-          </form>
-        </div>
-      </div>
-      <p class="muted">Utilisez une adresse e-mail valide. La confirmation par e-mail peut être nécessaire.</p>
+    <label data-fr="Nom complet" data-en="Full name">Nom complet</label>
+    <input id="fullName" autocomplete="name"
+           placeholder="Votre nom complet">
+
+    <label data-fr="Indicatif du pays" data-en="Country code">
+      Indicatif du pays
+    </label>
+
+    <select id="countryCode">
+      <option value="+243">🇨🇩 RDC (+243)</option>
+      <option value="+242">🇨🇬 Congo-Brazzaville (+242)</option>
+      <option value="+254">🇰🇪 Kenya (+254)</option>
+      <option value="+256">🇺🇬 Ouganda (+256)</option>
+      <option value="+250">🇷🇼 Rwanda (+250)</option>
+      <option value="+255">🇹🇿 Tanzanie (+255)</option>
+      <option value="+257">🇧🇮 Burundi (+257)</option>
+      <option value="+234">🇳🇬 Nigeria (+234)</option>
+      <option value="+27">🇿🇦 Afrique du Sud (+27)</option>
+      <option value="+233">🇬🇭 Ghana (+233)</option>
+      <option value="+254">🇰🇪 Kenya (+254)</option>
+      <option value="+256">🇺🇬 Uganda (+256)</option>
+      <option value="+1">🇺🇸 États-Unis / Canada (+1)</option>
+      <option value="+44">🇬🇧 Royaume-Uni (+44)</option>
+      <option value="+33">🇫🇷 France (+33)</option>
+      <option value="+32">🇧🇪 Belgique (+32)</option>
+      <option value="+49">🇩🇪 Allemagne (+49)</option>
+      <option value="+91">🇮🇳 Inde (+91)</option>
+      <option value="+971">🇦🇪 Émirats arabes unis (+971)</option>
+      <option value="+86">🇨🇳 Chine (+86)</option>
+    </select>
+
+    <label data-fr="Numéro de téléphone"
+           data-en="Phone number">Numéro de téléphone</label>
+
+    <input id="phone" type="tel" autocomplete="tel-national"
+           placeholder="Ex. 812345678">
+
+    <label data-fr="Code de parrainage (facultatif)"
+           data-en="Referral code (optional)">
+      Code de parrainage (facultatif)
+    </label>
+
+    <input id="referralCode" placeholder="ETHXXXXXXXX">
+
+    <button id="sendCodeBtn" class="gold-btn"
+            data-fr="Recevoir le code SMS"
+            data-en="Send SMS code">
+      Recevoir le code SMS
+    </button>
+
+    <div id="otpArea" class="hidden">
+      <label data-fr="Code reçu par SMS"
+             data-en="SMS verification code">
+        Code reçu par SMS
+      </label>
+
+      <input id="otpCode" inputmode="numeric"
+             autocomplete="one-time-code"
+             placeholder="123456">
+
+      <button id="verifyBtn" class="gold-btn"
+              data-fr="Vérifier et se connecter"
+              data-en="Verify and sign in">
+        Vérifier et se connecter
+      </button>
     </div>
+
+    <p class="small"
+       data-fr="Le service SMS doit être activé dans Supabase. Le code de vérification n'est pas envoyé par ce fichier lui-même."
+       data-en="SMS authentication must be enabled in Supabase. This file does not send verification messages itself.">
+      Le service SMS doit être activé dans Supabase. Le code de vérification n'est pas envoyé par ce fichier lui-même.
+    </p>
   </section>
 
-  <section id="dashboard" class="hidden">
-    <div class="card">
-      <h1 data-i18n="dashboard">Tableau de bord</h1>
-      <p id="profileName"></p>
-      <p class="muted">Code de parrainage : <strong id="referralCode">—</strong></p>
-      <p>Solde USDT</p>
-      <div class="amount" id="balance">0.00000000 USDT</div>
-      <p class="muted">Le solde affiché dépend des écritures vérifiées dans la base.</p>
-      <button class="secondary" id="logoutBtn" data-i18n="logout">Déconnexion</button>
-    </div>
+  <!-- APPLICATION -->
+  <section id="appSection" class="hidden">
 
     <nav>
-      <button data-page="home" data-i18n="home">Accueil</button>
-      <button data-page="vip">VIP</button>
-      <button data-page="deposit" data-i18n="deposit">Dépôt</button>
-      <button data-page="withdraw" data-i18n="withdraw">Retrait</button>
-      <button data-page="team" data-i18n="team">Mon équipe</button>
-      <button data-page="history" data-i18n="history">Historique</button>
+      <button class="active" data-tab="home"
+              data-fr="Accueil" data-en="Home">Accueil</button>
+
+      <button data-tab="vip"
+              data-fr="Niveaux VIP" data-en="VIP levels">Niveaux VIP</button>
+
+      <button data-tab="deposit"
+              data-fr="Dépôt" data-en="Deposit">Dépôt</button>
+
+      <button data-tab="withdraw"
+              data-fr="Retrait" data-en="Withdraw">Retrait</button>
+
+      <button data-tab="referrals"
+              data-fr="Parrainage" data-en="Referrals">Parrainage</button>
+
+      <button data-tab="profile"
+              data-fr="Mon compte" data-en="My account">Mon compte</button>
     </nav>
 
-    <section id="page-home" class="page">
+    <!-- ACCUEIL -->
+    <section id="tab-home" class="tab">
       <div class="card">
-        <h2 data-i18n="account">Mon compte</h2>
-        <p>Statut : <span id="accountStatus">—</span></p>
-        <p class="muted">Les opérations financières restent soumises à vérification.</p>
+        <h1 data-fr="Tableau de bord"
+            data-en="Dashboard">Tableau de bord</h1>
+
+        <p id="welcome"></p>
+
+        <p data-fr="Solde disponible"
+           data-en="Available balance">Solde disponible</p>
+
+        <div class="balance" id="balance">—</div>
+
+        <p class="small"
+           data-fr="Le solde affiché dépend des données enregistrées dans la base de données."
+           data-en="The displayed balance depends on the records in the database.">
+          Le solde affiché dépend des données enregistrées dans la base de données.
+        </p>
       </div>
-    </section>
 
-    <section id="page-vip" class="page hidden">
-      <div class="card">
-        <h2>Niveaux VIP</h2>
-        <div id="vipList">Chargement des niveaux VIP…</div>
-      </div>
-    </section>
+      <div class="grid">
+        <div class="card">
+          <h3 data-fr="Mon niveau VIP" data-en="My VIP level">
+            Mon niveau VIP
+          </h3>
+          <div id="currentVip">—</div>
+        </div>
 
-    <section id="page-deposit" class="page hidden">
-      <div class="card">
-        <h2 data-i18n="deposit">Dépôt</h2>
-        <p class="muted">Cette demande ne confirme pas la réception du paiement.</p>
-        <form id="depositForm">
-          <label>Montant en USDT</label>
-          <input id="depositAmount" type="number" min="10" step="0.00000001" required>
-          <label>Méthode</label>
-          <select id="depositMethod">
-            <option value="USDT BEP20">USDT BEP20</option>
-            <option value="USDT TRC20">USDT TRC20</option>
-            <option value="Airtel Money">Airtel Money</option>
-          </select>
-          <label>Référence de transaction (si disponible)</label>
-          <input id="depositReference" maxlength="200">
-          <button type="submit">Envoyer la demande</button>
-        </form>
-        <div class="notice">
-          Adresse BEP20 fournie pour le projet :
-          0x5a69eA8B84B42AeBD9a323a2C96c74eF44EDb340
-
-          Adresse TRON/TRC20 fournie pour le projet :
-          TMznxcGjJzSzwBW6fL4nFA2H6qUgEhLyjx
-
-          Vérifiez le réseau et l'adresse avant tout transfert.
+        <div class="card">
+          <h3 data-fr="Mes filleuls" data-en="My referrals">
+            Mes filleuls
+          </h3>
+          <div id="referralCount">—</div>
         </div>
       </div>
-    </section>
 
-    <section id="page-withdraw" class="page hidden">
       <div class="card">
-        <h2 data-i18n="withdraw">Retrait</h2>
-        <p class="muted">La demande sera en attente de vérification. Elle ne déclenche aucun paiement automatique.</p>
-        <form id="withdrawForm">
-          <label>Montant en USDT</label>
-          <input id="withdrawAmount" type="number" min="1" step="0.00000001" required>
-          <label>Méthode</label>
-          <select id="withdrawMethod">
-            <option value="USDT BEP20">USDT BEP20</option>
-            <option value="USDT TRC20">USDT TRC20</option>
-          </select>
-          <label>Adresse de destination</label>
-          <input id="withdrawDestination" maxlength="200" required>
-          <button type="submit">Envoyer la demande</button>
-        </form>
+        <h2 data-fr="Mes dernières opérations"
+            data-en="Recent requests">Mes dernières opérations</h2>
+        <div id="recentRequests">—</div>
       </div>
     </section>
 
-    <section id="page-team" class="page hidden">
+    <!-- VIP -->
+    <section id="tab-vip" class="tab hidden">
       <div class="card">
-        <h2 data-i18n="team">Mon équipe</h2>
-        <p>Votre code : <strong id="teamCode">—</strong></p>
-        <p id="teamCount">Chargement…</p>
+        <h1 data-fr="Niveaux VIP" data-en="VIP levels">Niveaux VIP</h1>
+        <p data-fr="Consultez les niveaux configurés dans la base de données."
+           data-en="View the levels configured in the database.">
+          Consultez les niveaux configurés dans la base de données.
+        </p>
+        <div id="vipList">Chargement...</div>
       </div>
     </section>
 
-    <section id="page-history" class="page hidden">
+    <!-- DÉPÔT -->
+    <section id="tab-deposit" class="tab hidden">
       <div class="card">
-        <h2 data-i18n="history">Historique</h2>
-        <h3>Dépôts</h3>
-        <div id="depositHistory"></div>
-        <h3>Retraits</h3>
-        <div id="withdrawHistory"></div>
+        <h1 data-fr="Demande de dépôt" data-en="Deposit request">
+          Demande de dépôt
+        </h1>
+
+        <p data-fr="Une demande n'est pas une confirmation de paiement."
+           data-en="A request is not a payment confirmation.">
+          Une demande n'est pas une confirmation de paiement.
+        </p>
+
+        <label data-fr="Montant" data-en="Amount">Montant</label>
+        <input id="depositAmount" type="number" min="1"
+               step="any" placeholder="Montant à déposer">
+
+        <label data-fr="Méthode de paiement"
+               data-en="Payment method">Méthode de paiement</label>
+
+        <select id="depositMethod">
+          <option value="USDT_BEP20">USDT BEP20</option>
+          <option value="USDT_TRC20">USDT TRC20</option>
+          <option value="AIRTEL_MONEY">Airtel Money</option>
+        </select>
+
+        <div class="notice">
+          <strong data-fr="Informations de paiement"
+                  data-en="Payment details">
+            Informations de paiement
+          </strong>
+
+          <p>USDT BEP20</p>
+          <code>0x5a69eA8B84B42AeBD9a323a2C96c74eF44EDb340</code>
+
+          <p>USDT TRC20</p>
+          <code>TMznxcGjJzSzwBW6fL4nFA2H6qUgEhLyjx</code>
+
+          <p>Airtel Money</p>
+          <code>0973087965 — BASHANGWA</code>
+        </div>
+
+        <label data-fr="Référence de transaction"
+               data-en="Transaction reference">
+          Référence de transaction
+        </label>
+
+        <input id="depositReference"
+               placeholder="Référence / identifiant de transaction">
+
+        <button id="depositBtn" class="gold-btn"
+                data-fr="Envoyer la demande"
+                data-en="Submit request">
+          Envoyer la demande
+        </button>
+
+        <p class="small"
+           data-fr="Ne soumets une demande qu'après avoir vérifié les informations du destinataire. Le dépôt restera en attente jusqu'à sa vérification."
+           data-en="Verify the recipient details before submitting. The deposit remains pending until verified.">
+          Ne soumets une demande qu'après avoir vérifié les informations du destinataire. Le dépôt restera en attente jusqu'à sa vérification.
+        </p>
       </div>
     </section>
+
+    <!-- RETRAIT -->
+    <section id="tab-withdraw" class="tab hidden">
+      <div class="card">
+        <h1 data-fr="Demande de retrait" data-en="Withdrawal request">
+          Demande de retrait
+        </h1>
+
+        <label data-fr="Montant" data-en="Amount">Montant</label>
+        <input id="withdrawAmount" type="number" min="1"
+               step="any" placeholder="Montant à retirer">
+
+        <label data-fr="Réseau" data-en="Network">Réseau</label>
+        <select id="withdrawMethod">
+          <option value="USDT_BEP20">USDT BEP20</option>
+          <option value="USDT_TRC20">USDT TRC20</option>
+        </select>
+
+        <label data-fr="Adresse de destination"
+               data-en="Destination address">
+          Adresse de destination
+        </label>
+
+        <input id="withdrawAddress"
+               placeholder="Adresse de portefeuille">
+
+        <button id="withdrawBtn" class="gold-btn"
+                data-fr="Envoyer la demande"
+                data-en="Submit request">
+          Envoyer la demande
+        </button>
+
+        <p class="small"
+           data-fr="Cette demande ne transfère pas automatiquement de fonds. Elle doit être vérifiée et traitée par le système sécurisé de la plateforme."
+           data-en="This request does not transfer funds automatically. It must be reviewed and processed by the platform's secure system.">
+          Cette demande ne transfère pas automatiquement de fonds. Elle doit être vérifiée et traitée par le système sécurisé de la plateforme.
+        </p>
+      </div>
+    </section>
+
+    <!-- PARRAINAGE -->
+    <section id="tab-referrals" class="tab hidden">
+      <div class="card">
+        <h1 data-fr="Mon parrainage" data-en="My referrals">
+          Mon parrainage
+        </h1>
+
+        <p data-fr="Votre code de parrainage"
+           data-en="Your referral code">Votre code de parrainage</p>
+
+        <div id="myReferralCode" class="balance">—</div>
+
+        <button id="copyReferralBtn" class="secondary-btn"
+                data-fr="Copier mon code"
+                data-en="Copy my code">
+          Copier mon code
+        </button>
+
+        <p data-fr="Les commissions éventuelles doivent être calculées et validées côté serveur."
+           data-en="Any referral commissions must be calculated and validated server-side.">
+          Les commissions éventuelles doivent être calculées et validées côté serveur.
+        </p>
+      </div>
+    </section>
+
+    <!-- PROFIL -->
+    <section id="tab-profile" class="tab hidden">
+      <div class="card">
+        <h1 data-fr="Mon compte" data-en="My account">Mon compte</h1>
+
+        <p data-fr="Téléphone" data-en="Phone">Téléphone</p>
+        <div id="profilePhone">—</div>
+
+        <p data-fr="Nom complet" data-en="Full name">Nom complet</p>
+        <input id="editName" placeholder="Nom complet">
+
+        <button id="saveProfileBtn" class="gold-btn"
+                data-fr="Enregistrer le nom"
+                data-en="Save name">
+          Enregistrer le nom
+        </button>
+
+        <button id="logoutBtn" class="secondary-btn"
+                style="width:100%;margin-top:12px"
+                data-fr="Se déconnecter"
+                data-en="Sign out">
+          Se déconnecter
+        </button>
+      </div>
+    </section>
+
   </section>
+
 </main>
 
-<footer>ETHBTC-USDT · Espace client</footer>
+<footer>
+  ETHBTC-USDT ·
+  <span data-fr="Plateforme internationale"
+        data-en="International platform">
+    Plateforme internationale
+  </span>
+</footer>
 
-<script type="module">
-import { createClient } from
-  'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+<script>
+(() => {
+  "use strict";
 
-const SUPABASE_URL = 'https://eyoiagoeqfubyjprgchv.supabase.co';
-const SUPABASE_ANON_KEY = 'sb_publishable_iZqrvxqiFzsr3lxNxzxy3w_Q12lo-Xl';
+  // CONFIGURATION SUPABASE
+  const SUPABASE_URL =
+    "https://eyoiagoeqfubyjprgchv.supabase.co";
 
-const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  const SUPABASE_KEY =
+    "sb_publishable_iZqrvxqiFzsr3lxNxzxy3w_Q12lo-Xl";
 
-const $ = id => document.getElementById(id);
-let currentUser = null;
-let currentProfile = null;
+  const db = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
 
-const translations = {
-  fr: {
-    welcome:'Bienvenue sur ETHBTC-USDT',
-    subtitle:'Connectez-vous ou créez votre compte.',
-    login:'Connexion', register:'Créer un compte',
-    password:'Mot de passe', fullname:'Nom complet',
-    referral:'Code de parrainage (facultatif)',
-    dashboard:'Tableau de bord', logout:'Déconnexion',
-    home:'Accueil', deposit:'Dépôt', withdraw:'Retrait',
-    team:'Mon équipe', history:'Historique', account:'Mon compte'
-  },
-  en: {
-    welcome:'Welcome to ETHBTC-USDT',
-    subtitle:'Sign in or create an account.',
-    login:'Sign in', register:'Create account',
-    password:'Password', fullname:'Full name',
-    referral:'Referral code (optional)',
-    dashboard:'Dashboard', logout:'Sign out',
-    home:'Home', deposit:'Deposit', withdraw:'Withdraw',
-    team:'My team', history:'History', account:'My account'
+  const $ = id => document.getElementById(id);
+
+  let user = null;
+  let profile = null;
+  let wallet = null;
+  let language = "fr";
+
+  function tr(fr, en) {
+    return language === "fr" ? fr : en;
   }
-};
 
-function showMessage(text, error=false) {
-  const box = $('message');
-  box.textContent = text;
-  box.classList.remove('hidden','good','bad');
-  box.classList.add(error ? 'bad' : 'good');
-  window.scrollTo({top:0,behavior:'smooth'});
-}
+  function showMessage(text, type = "") {
+    const box = $("message");
+    box.textContent = text;
+    box.className = "notice";
+    if (type) box.classList.add(type);
+    box.classList.remove("hidden");
+  }
 
-function hideMessage() {
-  $('message').classList.add('hidden');
-}
+  function hideMessage() {
+    $("message").classList.add("hidden");
+  }
 
-function setBusy(form, busy) {
-  form.querySelectorAll('button').forEach(b => b.disabled = busy);
-}
+  function setBusy(button, busy, label) {
+    button.disabled = busy;
+    if (busy) button.textContent = label;
+  }
 
-$('language').addEventListener('change', () => {
-  const lang = $('language').value;
-  document.documentElement.lang = lang;
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.dataset.i18n;
-    if (translations[lang][key]) el.textContent = translations[lang][key];
-  });
-});
+  function normalizePhone() {
+    const code = $("countryCode").value;
+    let number = $("phone").value.trim().replace(/[^\d]/g, "");
 
-$('registerForm').addEventListener('submit', async event => {
-  event.preventDefault();
-  hideMessage();
-  const form = event.currentTarget;
-  setBusy(form,true);
-  try {
-    const fullName = $('registerName').value.trim();
-    const email = $('registerEmail').value.trim();
-    const password = $('registerPassword').value;
-    const referral = $('registerReferral').value.trim();
+    if (number.startsWith("0")) {
+      number = number.substring(1);
+    }
 
-    if (password.length < 8) throw new Error('Le mot de passe doit contenir au moins 8 caractères.');
+    if (!number) throw new Error(
+      tr("Saisis ton numéro de téléphone.",
+         "Enter your phone number.")
+    );
 
-    const { data, error } = await supabase.auth.signUp({
-      email, password,
-      options: {
-        data: { full_name: fullName, referral_code_used: referral },
-        emailRedirectTo: window.location.origin
+    // Supabase attend un numéro au format international E.164.
+    return code + number;
+  }
+
+  async function sendCode() {
+    hideMessage();
+
+    const button = $("sendCodeBtn");
+    setBusy(button, true, tr("Envoi...", "Sending..."));
+
+    try {
+      const phone = normalizePhone();
+
+      const { error } = await db.auth.signInWithOtp({
+        phone,
+        options: {
+          shouldCreateUser: true,
+          data: {
+            full_name: $("fullName").value.trim(),
+            referral_code: $("referralCode").value.trim()
+          }
+        }
+      });
+
+      if (error) throw error;
+
+      $("otpArea").classList.remove("hidden");
+
+      showMessage(
+        tr(
+          "Demande envoyée. Vérifie tes SMS et saisis le code reçu.",
+          "Request sent. Check your SMS and enter the verification code."
+        ),
+        "success"
+      );
+    } catch (error) {
+      showMessage(error.message || String(error), "error");
+    } finally {
+      button.disabled = false;
+      button.textContent = tr("Recevoir le code SMS", "Send SMS code");
+    }
+  }
+
+  async function verifyCode() {
+    hideMessage();
+
+    const button = $("verifyBtn");
+    setBusy(button, true, tr("Vérification...", "Verifying..."));
+
+    try {
+      const phone = normalizePhone();
+      const token = $("otpCode").value.trim();
+
+      if (!token) {
+        throw new Error(tr("Saisis le code SMS.", "Enter the SMS code."));
       }
-    });
+
+      const { data, error } = await db.auth.verifyOtp({
+        phone,
+        token,
+        type: "sms"
+      });
+
+      if (error) throw error;
+
+      if (!data.user) {
+        throw new Error(tr(
+          "Connexion non confirmée.",
+          "Sign-in was not confirmed."
+        ));
+      }
+
+      user = data.user;
+
+      await ensureProfile();
+      await loadApp();
+
+      showMessage(
+        tr("Connexion réussie.", "Successfully signed in."),
+        "success"
+      );
+    } catch (error) {
+      showMessage(error.message || String(error), "error");
+    } finally {
+      button.disabled = false;
+      button.textContent = tr(
+        "Vérifier et se connecter",
+        "Verify and sign in"
+      );
+    }
+  }
+
+  async function ensureProfile() {
+    if (!user) return;
+
+    const { data: existing, error } = await db
+      .from("profiles")
+      .select("*")
+      .eq("id", user.id)
+      .maybeSingle();
+
     if (error) throw error;
 
-    if (!data.session) {
-      showMessage('Compte créé. Vérifie ta boîte e-mail pour confirmer ton inscription, puis connecte-toi.');
+    if (existing) {
+      profile = existing;
       return;
     }
 
-    await loadDashboard(data.user);
-    showMessage('Compte créé avec succès.');
-  } catch (error) {
-    showMessage(error.message || 'Erreur pendant l’inscription.',true);
-  } finally {
-    setBusy(form,false);
+    // Le profil devrait normalement être créé par le trigger SQL.
+    // L'insertion directe peut être bloquée par RLS.
+    const metadata = user.user_metadata || {};
+
+    const referralCode =
+      "ETH" + user.id.replace(/-/g, "").slice(0, 10).toUpperCase();
+
+    const { data: created, error: insertError } = await db
+      .from("profiles")
+      .insert({
+        id: user.id,
+        full_name: metadata.full_name || "",
+        referral_code: referralCode
+      })
+      .select("*")
+      .single();
+
+    if (insertError) {
+      throw new Error(
+        tr(
+          "Ton compte existe, mais le profil n'a pas pu être créé. Vérifie le déclencheur handle_new_user et les politiques RLS de profiles dans Supabase.",
+          "Your account exists, but its profile could not be created. Check the handle_new_user trigger and profiles RLS policies in Supabase."
+        )
+      );
+    }
+
+    profile = created;
   }
-});
 
-$('loginForm').addEventListener('submit', async event => {
-  event.preventDefault();
-  hideMessage();
-  const form = event.currentTarget;
-  setBusy(form,true);
-  try {
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email: $('loginEmail').value.trim(),
-      password: $('loginPassword').value
-    });
-    if (error) throw error;
-    await loadDashboard(data.user);
-    showMessage('Connexion réussie.');
-  } catch (error) {
-    showMessage(error.message || 'Erreur de connexion.',true);
-  } finally {
-    setBusy(form,false);
-  }
-});
+  async function loadWallet() {
+    wallet = null;
 
-$('logoutBtn').addEventListener('click', async () => {
-  const { error } = await supabase.auth.signOut();
-  if (error) return showMessage(error.message,true);
-  currentUser = null;
-  currentProfile = null;
-  $('dashboard').classList.add('hidden');
-  $('authSection').classList.remove('hidden');
-  showMessage('Déconnexion réussie.');
-});
-
-async function loadDashboard(user) {
-  currentUser = user;
-
-  let { data: profile, error: profileError } = await supabase
-    .from('profiles')
-    .select('id,full_name,referral_code,account_status')
-    .eq('id', user.id)
-    .maybeSingle();
-
-  if (profileError) throw profileError;
-
-  // Réparer un profil absent pour l'utilisateur connecté.
-  if (!profile) {
-    const referralCode = 'ETH' + user.id.replaceAll('-','').slice(0,10).toUpperCase();
-    const { error: insertError } = await supabase.from('profiles').insert({
-      id: user.id,
-      full_name: user.user_metadata?.full_name || '',
-      referral_code: referralCode,
-      account_status: 'active'
-    });
-
-    if (insertError && insertError.code !== '23505') throw insertError;
-
-    const retry = await supabase.from('profiles')
-      .select('id,full_name,referral_code,account_status')
-      .eq('id',user.id)
+    // Le schéma de wallets doit comporter user_id.
+    const { data, error } = await db
+      .from("wallets")
+      .select("*")
+      .eq("user_id", user.id)
       .maybeSingle();
 
-    if (retry.error) throw retry.error;
-    profile = retry.data;
-  }
-
-  if (!profile) throw new Error('Profil introuvable. Vérifie les politiques RLS de profiles.');
-
-  currentProfile = profile;
-
-  // Le portefeuille est créé côté SQL par le déclencheur.
-  const { data: wallet, error: walletError } = await supabase
-    .from('wallets')
-    .select('balance,currency')
-    .eq('user_id',user.id)
-    .maybeSingle();
-
-  if (walletError) throw walletError;
-
-  $('profileName').textContent = profile.full_name || user.email || 'Membre';
-  $('referralCode').textContent = profile.referral_code || '—';
-  $('teamCode').textContent = profile.referral_code || '—';
-  $('accountStatus').textContent = profile.account_status || 'active';
-  $('balance').textContent =
-    `${Number(wallet?.balance || 0).toFixed(8)} ${wallet?.currency || 'USDT'}`;
-
-  $('authSection').classList.add('hidden');
-  $('dashboard').classList.remove('hidden');
-
-  await Promise.all([
-    loadVIP(),
-    loadTeam(),
-    loadHistory()
-  ]);
-}
-
-async function loadVIP() {
-  const { data, error } = await supabase
-    .from('vip_levels')
-    .select('level,name,min_amount,max_amount,price,description')
-    .eq('active',true)
-    .order('level');
-
-  if (error) {
-    $('vipList').textContent = 'Erreur VIP : ' + error.message;
-    return;
-  }
-
-  if (!data?.length) {
-    $('vipList').textContent = 'Aucun niveau VIP actif.';
-    return;
-  }
-
-  const grid = document.createElement('div');
-  grid.className = 'grid';
-
-  data.forEach(vip => {
-    const card = document.createElement('div');
-    card.className = 'card';
-    const title = document.createElement('h3');
-    title.textContent = vip.name || `VIP ${vip.level}`;
-    const range = document.createElement('p');
-    range.textContent = `Montant : ${vip.min_amount} à ${vip.max_amount} USDT`;
-    const desc = document.createElement('p');
-    desc.textContent = vip.description || '';
-    card.append(title,range,desc);
-    grid.appendChild(card);
-  });
-
-  $('vipList').replaceChildren(grid);
-}
-
-$('depositForm').addEventListener('submit', async event => {
-  event.preventDefault();
-  await submitRequest(event.currentTarget, async () => {
-    const amount = Number($('depositAmount').value);
-    if (!Number.isFinite(amount) || amount < 10) {
-      throw new Error('Le dépôt minimum est de 10 USDT.');
+    if (error) {
+      console.warn("Wallet:", error.message);
+      return;
     }
 
-    const { error } = await supabase.from('deposit_requests').insert({
-      user_id: currentUser.id,
-      amount,
-      method: $('depositMethod').value,
-      transaction_reference: $('depositReference').value.trim() || null,
-      status: 'pending'
-    });
-    if (error) throw error;
-    $('depositForm').reset();
-    showMessage('Demande de dépôt enregistrée. Le paiement doit être vérifié séparément.');
-    await loadHistory();
-  });
-});
+    wallet = data;
+  }
 
-$('withdrawForm').addEventListener('submit', async event => {
-  event.preventDefault();
-  await submitRequest(event.currentTarget, async () => {
-    const amount = Number($('withdrawAmount').value);
-    if (!Number.isFinite(amount) || amount < 1) {
-      throw new Error('Le retrait minimum est de 1 USDT.');
+  function formatMoney(value) {
+    const n = Number(value || 0);
+
+    return new Intl.NumberFormat(
+      language === "fr" ? "fr-FR" : "en-US",
+      { maximumFractionDigits: 4 }
+    ).format(n);
+  }
+
+  async function loadVip() {
+    const target = $("vipList");
+    target.textContent = tr("Chargement...", "Loading...");
+
+    const { data, error } = await db
+      .from("vip_levels")
+      .select("*")
+      .eq("active", true)
+      .order("level", { ascending: true });
+
+    if (error) {
+      target.textContent =
+        tr("Impossible de charger les VIP : ",
+           "Could not load VIP levels: ") + error.message;
+      return;
     }
 
-    const { error } = await supabase.from('withdrawal_requests').insert({
-      user_id: currentUser.id,
-      amount,
-      method: $('withdrawMethod').value,
-      destination: $('withdrawDestination').value.trim(),
-      status: 'pending'
+    if (!data || data.length === 0) {
+      target.textContent = tr(
+        "Aucun niveau VIP actif.",
+        "No active VIP levels."
+      );
+      return;
+    }
+
+    target.replaceChildren();
+
+    data.forEach(vip => {
+      const card = document.createElement("div");
+      card.className = "item";
+
+      const title = document.createElement("strong");
+      title.textContent = vip.name || ("VIP " + vip.level);
+
+      const details = document.createElement("p");
+      details.textContent =
+        tr("Prix : ", "Price: ") +
+        formatMoney(vip.price) +
+        " | " +
+        tr("Minimum : ", "Minimum: ") +
+        formatMoney(vip.min_amount) +
+        " | " +
+        tr("Maximum : ", "Maximum: ") +
+        formatMoney(vip.max_amount);
+
+      card.append(title, details);
+      target.appendChild(card);
     });
-    if (error) throw error;
-    $('withdrawForm').reset();
-    showMessage('Demande de retrait enregistrée pour vérification. Aucun paiement automatique n’a été effectué.');
-    await loadHistory();
-  });
-});
-
-async function submitRequest(form, action) {
-  hideMessage();
-  setBusy(form,true);
-  try {
-    if (!currentUser) throw new Error('Reconnecte-toi pour continuer.');
-    await action();
-  } catch (error) {
-    showMessage(error.message || 'Impossible d’enregistrer la demande.',true);
-  } finally {
-    setBusy(form,false);
-  }
-}
-
-async function loadTeam() {
-  if (!currentProfile?.referral_code) {
-    $('teamCount').textContent = 'Code de parrainage indisponible.';
-    return;
   }
 
-  const { count, error } = await supabase
-    .from('profiles')
-    .select('id',{count:'exact',head:true})
-    .eq('referred_by',currentProfile.referral_code);
+  async function loadReferrals() {
+    const code = profile?.referral_code || "—";
+    $("myReferralCode").textContent = code;
 
-  $('teamCount').textContent = error
-    ? 'Impossible de charger l’équipe.'
-    : `Membres parrainés enregistrés : ${count || 0}`;
-}
+    const { count, error } = await db
+      .from("profiles")
+      .select("id", { count: "exact", head: true })
+      .eq("referred_by", code);
 
-function renderRows(target, rows) {
-  if (!rows?.length) {
-    $(target).textContent = 'Aucune demande.';
-    return;
+    if (error) {
+      $("referralCount").textContent = "—";
+      console.warn("Referrals:", error.message);
+    } else {
+      $("referralCount").textContent = String(count || 0);
+    }
   }
-  const table = document.createElement('table');
-  const head = document.createElement('tr');
-  ['Montant','Méthode','Statut','Date'].forEach(value => {
-    const th = document.createElement('th');
-    th.textContent = value;
-    head.appendChild(th);
-  });
-  table.appendChild(head);
 
-  rows.forEach(row => {
-    const tr = document.createElement('tr');
-    [row.amount,row.method,row.status,
-      new Date(row.created_at).toLocaleDateString()].forEach(value => {
-      const td = document.createElement('td');
-      td.textContent = String(value ?? '');
-      tr.appendChild(td);
+  async function loadRequests() {
+    const target = $("recentRequests");
+    target.textContent = tr("Chargement...", "Loading...");
+
+    const [deposits, withdrawals] = await Promise.all([
+      db.from("deposit_requests")
+        .select("*")
+        .eq("user_id", user.id)
+        .order("created_at", { ascending: false })
+        .limit(5),
+
+      db.from("withdrawal_requests")
+        .select("*")
+        .eq("user_id", user.id)
+        .order("created_at", { ascending: false })
+        .limit(5)
+    ]);
+
+    target.replaceChildren();
+
+    const rows = [];
+
+    if (!deposits.error) {
+      (deposits.data || []).forEach(row => {
+        rows.push({
+          kind: tr("Dépôt", "Deposit"),
+          amount: row.amount,
+          status: row.status,
+          date: row.created_at
+        });
+      });
+    }
+
+    if (!withdrawals.error) {
+      (withdrawals.data || []).forEach(row => {
+        rows.push({
+          kind: tr("Retrait", "Withdrawal"),
+          amount: row.amount,
+          status: row.status,
+          date: row.created_at
+        });
+      });
+    }
+
+    rows.sort((a, b) =>
+      new Date(b.date || 0) - new Date(a.date || 0)
+    );
+
+    if (rows.length === 0) {
+      target.textContent = tr(
+        "Aucune demande enregistrée.",
+        "No requests recorded."
+      );
+      return;
+    }
+
+    rows.slice(0, 8).forEach(row => {
+      const item = document.createElement("div");
+      item.className = "item";
+      item.textContent =
+        row.kind + " · " +
+        formatMoney(row.amount) + " · " +
+        (row.status || "pending") + " · " +
+        (row.date ? new Date(row.date).toLocaleDateString() : "");
+      target.appendChild(item);
     });
-    table.appendChild(tr);
-  });
-  $(target).replaceChildren(table);
-}
-
-async function loadHistory() {
-  if (!currentUser) return;
-
-  const [deposits, withdrawals] = await Promise.all([
-    supabase.from('deposit_requests')
-      .select('amount,method,status,created_at')
-      .eq('user_id',currentUser.id)
-      .order('created_at',{ascending:false}).limit(20),
-    supabase.from('withdrawal_requests')
-      .select('amount,method,status,created_at')
-      .eq('user_id',currentUser.id)
-      .order('created_at',{ascending:false}).limit(20)
-  ]);
-
-  $('depositHistory').textContent = '';
-  $('withdrawHistory').textContent = '';
-
-  if (deposits.error) {
-    $('depositHistory').textContent = 'Erreur : ' + deposits.error.message;
-  } else renderRows('depositHistory',deposits.data);
-
-  if (withdrawals.error) {
-    $('withdrawHistory').textContent = 'Erreur : ' + withdrawals.error.message;
-  } else renderRows('withdrawHistory',withdrawals.data);
-}
-
-document.querySelectorAll('[data-page]').forEach(button => {
-  button.addEventListener('click',() => {
-    document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
-    $('page-' + button.dataset.page).classList.remove('hidden');
-  });
-});
-
-supabase.auth.onAuthStateChange((event, session) => {
-  if (event === 'SIGNED_OUT') {
-    currentUser = null;
-    $('dashboard').classList.add('hidden');
-    $('authSection').classList.remove('hidden');
   }
-});
 
-async function initialize() {
-  try {
-    const { data, error } = await supabase.auth.getSession();
+  async function loadApp() {
+    if (!user) return;
+
+    await ensureProfile();
+    await loadWallet();
+
+    $("authSection").classList.add("hidden");
+    $("appSection").classList.remove("hidden");
+
+    $("welcome").textContent =
+      tr("Bienvenue, ", "Welcome, ") +
+      (profile.full_name || user.phone || "");
+
+    $("profilePhone").textContent = user.phone || "—";
+    $("editName").value = profile.full_name || "";
+
+    const amount = wallet
+      ? (wallet.balance ?? wallet.amount ?? 0)
+      : 0;
+
+    $("balance").textContent = formatMoney(amount);
+
+    $("currentVip").textContent =
+      profile.vip_level ?? profile.level ?? "—";
+
+    await Promise.all([
+      loadVip(),
+      loadReferrals(),
+      loadRequests()
+    ]);
+  }
+
+  async function createRequest(table, payload) {
+    if (!user) {
+      throw new Error(tr(
+        "Connecte-toi d'abord.",
+        "Please sign in first."
+      ));
+    }
+
+    // Le serveur et les politiques RLS doivent imposer
+    // user_id = utilisateur connecté et status = pending.
+    const { error } = await db.from(table).insert({
+      user_id: user.id,
+      ...payload,
+      status: "pending"
+    });
+
     if (error) throw error;
-    if (data.session?.user) await loadDashboard(data.session.user);
-  } catch (error) {
-    showMessage(error.message || 'Impossible de charger les données.',true);
   }
-}
 
-initialize();
+  async function submitDeposit() {
+    const button = $("depositBtn");
+    hideMessage();
+    button.disabled = true;
+
+    try {
+      const amount = Number($("depositAmount").value);
+      const method = $("depositMethod").value;
+      const reference = $("depositReference").value.trim();
+
+      if (!Number.isFinite(amount) || amount <= 0) {
+        throw new Error(tr(
+          "Saisis un montant valide.",
+          "Enter a valid amount."
+        ));
+      }
+
+      if (!reference) {
+        throw new Error(tr(
+          "Ajoute la référence de transaction pour faciliter la vérification.",
+          "Add the transaction reference to help verification."
+        ));
+      }
+
+      await createRequest("deposit_requests", {
+        amount,
+        method,
+        transaction_reference: reference
+      });
+
+      $("depositAmount").value = "";
+      $("depositReference").value = "";
+
+      showMessage(tr(
+        "Demande enregistrée en attente de vérification. Aucun solde n'a été crédité.",
+        "Request submitted for verification. No balance has been credited."
+      ), "success");
+
+      await loadRequests();
+    } catch (error) {
+      showMessage(error.message || String(error), "error");
+    } finally {
+      button.disabled = false;
+      button.textContent = tr("Envoyer la demande", "Submit request");
+    }
+  }
+
+  async function submitWithdrawal() {
+    const button = $("withdrawBtn");
+    hideMessage();
+    button.disabled = true;
+
+    try {
+      const amount = Number($("withdrawAmount").value);
+      const method = $("withdrawMethod").value;
+      const address = $("withdrawAddress").value.trim();
+
+      if (!Number.isFinite(amount) || amount <= 0) {
+        throw new Error(tr(
+          "Saisis un montant valide.",
+          "Enter a valid amount."
+        ));
+      }
+
+      if (!address) {
+        throw new Error(tr(
+          "Saisis une adresse de destination.",
+          "Enter a destination address."
+        ));
+      }
+
+      await createRequest("withdrawal_requests", {
+        amount,
+        method,
+        destination_address: address
+      });
+
+      $("withdrawAmount").value = "";
+      $("withdrawAddress").value = "";
+
+      showMessage(tr(
+        "Demande de retrait enregistrée en attente de traitement. Aucun transfert automatique n'a été effectué.",
+        "Withdrawal request submitted for review. No automatic transfer has occurred."
+      ), "success");
+
+      await loadRequests();
+    } catch (error) {
+      showMessage(error.message || String(error), "error");
+    } finally {
+      button.disabled = false;
+      button.textContent = tr("Envoyer la demande", "Submit request");
+    }
+  }
+
+  async function saveProfile() {
+    hideMessage();
+
+    try {
+      const name = $("editName").value.trim();
+
+      const { data, error } = await db
+        .from("profiles")
+        .update({ full_name: name })
+        .eq("id", user.id)
+        .select("*")
+        .single();
+
+      if (error) throw error;
+
+      profile = data;
+      $("welcome").textContent =
+        tr("Bienvenue, ", "Welcome, ") + (name || user.phone || "");
+
+      showMessage(tr(
+        "Profil mis à jour.",
+        "Profile updated."
+      ), "success");
+    } catch (error) {
+      showMessage(error.message || String(error), "error");
+    }
+  }
+
+  async function logout() {
+    const { error } = await db.auth.signOut();
+
+    if (error) {
+      showMessage(error.message, "error");
+      return;
+    }
+
+    user = null;
+    profile = null;
+    wallet = null;
+
+    $("appSection").classList.add("hidden");
+    $("authSection").classList.remove("hidden");
+    $("otpArea").classList.add("hidden");
+
+    showMessage(tr(
+      "Tu es déconnecté.",
+      "You are signed out."
+    ), "success");
+  }
+
+  function openTab(name) {
+    document.querySelectorAll(".tab").forEach(section => {
+      section.classList.toggle(
+        "hidden",
+        section.id !== "tab-" + name
+      );
+    });
+
+    document.querySelectorAll("nav button").forEach(button => {
+      button.classList.toggle(
+        "active",
+        button.dataset.tab === name
+      );
+    });
+  }
+
+  async function copyReferral() {
+    const code = profile?.referral_code || "";
+
+    if (!code) {
+      showMessage(tr(
+        "Aucun code disponible.",
+        "No referral code available."
+      ), "error");
+      return;
+    }
+
+    try {
+      await navigator.clipboard.writeText(code);
+      showMessage(tr(
+        "Code copié.",
+        "Code copied."
+      ), "success");
+    } catch {
+      showMessage(
+        tr("Ton code : ", "Your code: ") + code
+      );
+    }
+  }
+
+  function changeLanguage(value) {
+    language = value;
+
+    document.documentElement.lang = value;
+
+    document.querySelectorAll("[data-fr][data-en]").forEach(el => {
+      el.textContent = el.dataset[value];
+    });
+
+    $("sendCodeBtn").textContent = tr(
+      "Recevoir le code SMS", "Send SMS code"
+    );
+
+    $("verifyBtn").textContent = tr(
+      "Vérifier et se connecter", "Verify and sign in"
+    );
+
+    $("depositBtn").textContent = tr(
+      "Envoyer la demande", "Submit request"
+    );
+
+    $("withdrawBtn").textContent = tr(
+      "Envoyer la demande", "Submit request"
+    );
+  }
+
+  $("sendCodeBtn").addEventListener("click", sendCode);
+  $("verifyBtn").addEventListener("click", verifyCode);
+  $("depositBtn").addEventListener("click", submitDeposit);
+  $("withdrawBtn").addEventListener("click", submitWithdrawal);
+  $("saveProfileBtn").addEventListener("click", saveProfile);
+  $("logoutBtn").addEventListener("click", logout);
+  $("copyReferralBtn").addEventListener("click", copyReferral);
+
+  $("language").addEventListener("change", event => {
+    changeLanguage(event.target.value);
+  });
+
+  document.querySelectorAll("nav button[data-tab]").forEach(button => {
+    button.addEventListener("click", () => openTab(button.dataset.tab));
+  });
+
+  async function initialize() {
+    try {
+      const { data, error } = await db.auth.getSession();
+
+      if (error) throw error;
+
+      user = data.session?.user || null;
+
+      if (user) {
+        await loadApp();
+      }
+    } catch (error) {
+      showMessage(
+        tr("Erreur de connexion : ", "Connection error: ") +
+        (error.message || String(error)),
+        "error"
+      );
+    }
+  }
+
+  initialize();
+})();
 </script>
+
 </body>
 </html>
