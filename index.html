@@ -6,38 +6,26 @@
 <meta name="theme-color" content="#281204">
 <title>ETHBTC-USDT | Espace membre</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <style>
 :root{--fond:#170b03;--carte:#2b1506;--or:#ffc72c;--or2:#ffe9a0;--texte:#fff8e9;--bordure:#b98516}
 *{box-sizing:border-box}
 body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--texte);background:linear-gradient(145deg,#170b03,#402006,#170b03);min-height:100vh}
-button,input,select{font:inherit}
-button{cursor:pointer}
-button:disabled{opacity:.6;cursor:not-allowed}
+button,input,select{font:inherit}button{cursor:pointer}button:disabled{opacity:.5;cursor:not-allowed}
 header{background:#210e03;border-bottom:2px solid var(--or);padding:14px;display:flex;align-items:center;justify-content:space-between;gap:10px}
-.logo{font-size:21px;font-weight:900;color:var(--or)}
-.subtitle{font-size:12px;margin-top:5px}
+.logo{font-size:21px;font-weight:900;color:var(--or)}.subtitle{font-size:12px;margin-top:5px}
 .header-button,.gold-button{border:0;border-radius:10px;background:linear-gradient(#ffe58a,#f0a900);color:#1c1003;padding:12px 15px;font-weight:bold}
-main{max-width:900px;margin:auto;padding:12px}
-.page{padding-bottom:20px}
+main{max-width:900px;margin:auto;padding:12px}.page{padding-bottom:20px}
 .card{background:rgba(35,16,3,.95);border:1px solid var(--bordure);border-radius:15px;padding:17px;box-shadow:0 5px 20px #0005;margin:12px 0;min-width:0;overflow-wrap:anywhere}
-.card h2,.section-title{color:var(--or)}
-.card h2{font-size:20px;margin-top:0}
-.field{margin:12px 0}
-label{display:block;font-size:13px;margin-bottom:6px;color:#ffe8a6}
+.card h2,.section-title{color:var(--or)}.card h2{font-size:20px;margin-top:0}
+.field{margin:12px 0}label{display:block;font-size:13px;margin-bottom:6px;color:#ffe8a6}
 input,select{width:100%;padding:13px;border:1px solid #d0b77b;border-radius:9px;background:#fffaf0;color:#211406}
-button.full{width:100%;margin-top:10px}
-.small{font-size:12px;line-height:1.6;color:#e5d2ac}
+button.full{width:100%;margin-top:10px}.small{font-size:12px;line-height:1.6;color:#e5d2ac}
 .notice{padding:12px;border-radius:9px;margin:10px 0;display:none;line-height:1.5;overflow-wrap:anywhere}
-.notice.ok{display:block;background:#163c20;color:#caffd0}
-.notice.err{display:block;background:#501515;color:#ffd0d0}
-.hidden{display:none!important}
-.wallet-address{display:block;background:#1b0d03;border:1px solid #79500e;border-radius:8px;padding:10px;font-size:12px;overflow-wrap:anywhere;color:#fff0c1;margin-top:8px}
+.notice.ok{display:block;background:#163c20;color:#caffd0}.notice.err{display:block;background:#501515;color:#ffd0d0}
+.hidden{display:none!important}.wallet-address{display:block;background:#1b0d03;border:1px solid #79500e;border-radius:8px;padding:10px;font-size:12px;overflow-wrap:anywhere;color:#fff0c1;margin-top:8px}
 .copy-button{background:linear-gradient(#ffe58a,#f0a900);border:0;border-radius:9px;padding:10px 12px;font-weight:bold;color:#211406}
 .vip-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px}
-.vip-card{text-align:center}
-.vip-card h3{color:var(--or)}
-.vip-price{font-size:22px;font-weight:bold;color:var(--or2)}
+.vip-card{text-align:center}.vip-card h3{color:var(--or)}.vip-price{font-size:22px;font-weight:bold;color:var(--or2)}
 .vip-info{border-top:1px solid #79500e;margin-top:12px;padding-top:8px;text-align:left;font-size:13px;line-height:1.8}
 .stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:10px}
 .stat-box{background:#1b0d03;border:1px solid #79500e;padding:14px;border-radius:10px;text-align:center}
@@ -50,68 +38,40 @@ button.full{width:100%;margin-top:10px}
 .bottom-nav button.active{color:#fff;background:#51300a;border-radius:8px}
 .bottom-nav span{display:block;font-size:20px;margin-bottom:4px}
 footer{padding:22px 12px;text-align:center;border-top:1px solid var(--bordure);margin-top:20px;font-size:12px;color:#dfcba5}
-.slider{position:relative;width:100%;overflow:hidden;border:1px solid var(--bordure);border-radius:15px;margin-bottom:14px;background:#1b0d03}
-.slider-track{display:flex;transition:transform .5s ease}
-.slide{min-width:100%;height:190px;position:relative}
-.slide img{width:100%;height:100%;object-fit:cover;display:block}
-.slide-caption{position:absolute;left:0;right:0;bottom:0;padding:25px 12px 12px;background:linear-gradient(transparent,#170b03eF);font-weight:bold;color:#ffe9a0}
-.slider-dots{position:absolute;bottom:7px;right:10px;display:flex;gap:5px}
-.slider-dot{width:7px;height:7px;border-radius:50%;background:#fff8e9a0;border:0;padding:0}
-.slider-dot.active{background:var(--or);width:18px;border-radius:5px}
 .commission-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
 .commission-box{background:#1b0d03;border:1px solid var(--bordure);border-radius:10px;padding:14px 5px;text-align:center}
-.commission-box strong{display:block;font-size:24px;color:var(--or)}
-.commission-box span{font-size:12px;color:#ffe9a0}
+.commission-box strong{display:block;font-size:24px;color:var(--or)}.commission-box span{font-size:12px;color:#ffe9a0}
 .auth-switch{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
 .auth-switch button{border:1px solid var(--bordure);border-radius:9px;background:#321a06;color:#ffe9a0;padding:12px;font-weight:bold}
 .auth-switch button.active{background:linear-gradient(#ffe58a,#f0a900);color:#211406}
-.admin-table-wrap{overflow-x:auto}
-table{width:100%;border-collapse:collapse;font-size:12px}
-th,td{border:1px solid #79500e;padding:8px;text-align:left}
-th{color:var(--or2);background:#321a06}
-td{overflow-wrap:anywhere}
-.admin-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.admin-table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;font-size:12px}
+th,td{border:1px solid #79500e;padding:8px;text-align:left}th{color:var(--or2);background:#321a06}
+td{overflow-wrap:anywhere}.admin-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
 .asset-grid{display:grid;grid-template-columns:1fr;gap:10px}
 .asset-box{background:#1b0d03;border:1px solid #79500e;border-radius:12px;padding:15px}
-.asset-box span{display:block;color:#ffe9a0;font-size:13px}
-.asset-box strong{display:block;color:var(--or);font-size:25px;margin-top:8px;overflow-wrap:anywhere}
+.asset-box span{display:block;color:#ffe9a0;font-size:13px}.asset-box strong{display:block;color:var(--or);font-size:25px;margin-top:8px;overflow-wrap:anywhere}
 .mining-summary{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 .mining-panel{background:#1b0d03;border:1px solid #79500e;border-radius:12px;padding:14px}
-.mining-panel .label{color:#ffe9a0;font-size:13px}
-.mining-panel .value{font-size:23px;color:var(--or);font-weight:bold;margin-top:8px}
+.mining-panel .label{color:#ffe9a0;font-size:13px}.mining-panel .value{font-size:23px;color:var(--or);font-weight:bold;margin-top:8px}
 .mining-record{background:#1b0d03;border:1px solid #79500e;border-radius:10px;padding:12px;margin:10px 0}
 .mining-record .record-row{display:flex;justify-content:space-between;gap:10px;padding:5px 0;font-size:13px}
 .mining-record .record-row span:first-child{color:#ffe9a0}
 .vip-level-box{border:1px solid #79500e;border-radius:10px;padding:12px;margin:10px 0;background:#1b0d03}
 .timer{font-size:20px;color:var(--or);font-weight:bold;text-align:center;margin:12px 0}
-@media(max-width:500px){header{padding:12px 9px}.logo{font-size:17px}.slide{height:160px}.commission-box strong{font-size:21px}.admin-actions{grid-template-columns:1fr}.mining-summary{grid-template-columns:1fr}}
+.claim-button{display:block;width:100%;border:0;border-radius:10px;padding:14px;margin-top:12px;background:linear-gradient(120deg,#39e36b,#079b3d);color:#062b12;font-weight:900;font-size:16px;box-shadow:0 0 12px #18d65b66;animation:pulse 1.5s infinite}
+.claim-button:disabled{background:#555;color:#ddd;animation:none;box-shadow:none}
+@keyframes pulse{0%,100%{filter:brightness(1)}50%{filter:brightness(1.25)}}
+@media(max-width:500px){header{padding:12px 9px}.logo{font-size:17px}.commission-box strong{font-size:21px}.admin-actions{grid-template-columns:1fr}.mining-summary{grid-template-columns:1fr}}
 </style>
 </head>
-
 <body>
 <header>
-  <div>
-    <div class="logo">⛏ ETHBTC-USDT</div>
-    <div class="subtitle">Espace membre</div>
-  </div>
+  <div><div class="logo">⛏ ETHBTC-USDT</div><div class="subtitle">Espace membre</div></div>
   <button class="header-button" id="header-auth" type="button">Inscription / Connexion</button>
 </header>
 
 <main>
 <section id="home" class="page">
-  <div class="slider" id="photo-slider">
-    <div class="slider-track" id="slider-track">
-      <div class="slide"><img src="https://images.unsplash.com/photo-1621761191319-c6fb62004040?auto=format&fit=crop&w=1000&q=80" alt="Cryptomonnaies"><div class="slide-caption">Bienvenue sur ETHBTC-USDT</div></div>
-      <div class="slide"><img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=1000&q=80" alt="Blockchain"><div class="slide-caption">Espace membre</div></div>
-      <div class="slide"><img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1000&q=80" alt="Marchés"><div class="slide-caption">Consultez les niveaux VIP</div></div>
-    </div>
-    <div class="slider-dots" id="slider-dots">
-      <button class="slider-dot active" type="button" aria-label="Photo 1"></button>
-      <button class="slider-dot" type="button" aria-label="Photo 2"></button>
-      <button class="slider-dot" type="button" aria-label="Photo 3"></button>
-    </div>
-  </div>
-
   <div class="card">
     <h2>Bienvenue sur ETHBTC-USDT</h2>
     <p class="small">Accédez aux fonctionnalités de votre espace membre.</p>
@@ -124,25 +84,14 @@ td{overflow-wrap:anywhere}
       <button class="shortcut" onclick="openFeature('minier')"><span class="icon">⛏️</span>Bassin minier</button>
     </div>
   </div>
-
   <div class="card">
     <h2>Mes actifs</h2>
     <div class="asset-grid">
       <div class="asset-box"><span>Total des actifs</span><strong id="asset-total">$0.00 (USDT)</strong></div>
       <div class="asset-box"><span>Portefeuille d'investissement</span><strong id="asset-investment">$0.00 (USDT)</strong></div>
-      <div class="asset-box"><span>Portefeuille de courtage / retirable</span><strong id="asset-withdrawable">$0.00 (USDT)</strong></div>
+      <div class="asset-box"><span>Portefeuille retirable</span><strong id="asset-withdrawable">$0.00 (USDT)</strong></div>
     </div>
-    <p class="small">Les montants sont calculés à partir des données disponibles et confirmées dans votre compte.</p>
     <button class="gold-button full" onclick="refreshAssets()">Actualiser les actifs</button>
-  </div>
-
-  <div class="card">
-    <h2>Commissions d'équipe</h2>
-    <div class="commission-grid">
-      <div class="commission-box"><strong>15 %</strong><span>Niveau 1</span></div>
-      <div class="commission-box"><strong>2 %</strong><span>Niveau 2</span></div>
-      <div class="commission-box"><strong>1 %</strong><span>Niveau 3</span></div>
-    </div>
   </div>
 </section>
 
@@ -166,7 +115,7 @@ td{overflow-wrap:anywhere}
             <option value="+33" data-country="France">🇫🇷 France (+33)</option>
           </select>
         </div>
-        <div class="field"><label>Numéro de téléphone</label><input id="phone" type="tel" required placeholder="Ex. 0970000000"></div>
+        <div class="field"><label>Numéro de téléphone</label><input id="phone" type="tel" required></div>
         <div class="field"><label>Code secret</label><input id="reg-password" type="password" minlength="6" required></div>
         <div class="field"><label>Confirmer le code secret</label><input id="confirm-password" type="password" minlength="6" required></div>
         <div class="field"><label>Code de parrainage</label><input id="referral-input" maxlength="30"></div>
@@ -228,7 +177,12 @@ td{overflow-wrap:anywhere}
     <div id="deposit-message" class="notice"></div>
     <form id="deposit-form">
       <div class="field"><label>Montant en $ (USDT)</label><input id="deposit-amount" type="number" min="0.01" step="0.01" required></div>
-      <div class="field"><label>Méthode de paiement</label><select id="deposit-method"><option value="TRON">Airtel Money</option><option value="TRON">Orange Money</option><option value="TRON">Vodacom / M-Pesa</option><option value="BEP20">USDT BEP20</option><option value="TRC20">USDT TRC20</option></select></div>
+      <div class="field"><label>Méthode de paiement</label>
+        <select id="deposit-method">
+          <option value="AIRTEL">Airtel Money</option><option value="ORANGE">Orange Money</option>
+          <option value="VODACOM">Vodacom / M-Pesa</option><option value="BEP20">USDT BEP20</option><option value="TRC20">USDT TRC20</option>
+        </select>
+      </div>
       <div class="field"><label>Référence de transaction</label><input id="deposit-reference" maxlength="150"></div>
       <button class="gold-button full" id="deposit-button">Envoyer la demande</button>
     </form>
@@ -255,6 +209,14 @@ td{overflow-wrap:anywhere}
 <section id="parrainage" class="page hidden">
   <h2 class="section-title">Invités et parrainage</h2>
   <div class="card">
+    <h2>Commissions d'équipe</h2>
+    <div class="commission-grid">
+      <div class="commission-box"><strong>15 %</strong><span>Niveau 1</span></div>
+      <div class="commission-box"><strong>2 %</strong><span>Niveau 2</span></div>
+      <div class="commission-box"><strong>1 %</strong><span>Niveau 3</span></div>
+    </div>
+  </div>
+  <div class="card">
     <h2>Mon lien de parrainage</h2>
     <div id="referral-link-display" class="wallet-address">Connectez-vous pour obtenir votre lien.</div>
     <button class="gold-button full" onclick="copySignupLink()">Copier mon lien</button>
@@ -275,16 +237,12 @@ td{overflow-wrap:anywhere}
   <div class="card"><h2>Créer un compte</h2><p class="small">Inscrivez-vous avec votre numéro et votre code secret.</p></div>
   <div class="card"><h2>Recharger</h2><p class="small">Effectuez votre paiement puis envoyez une demande de recharge.</p></div>
   <div class="card"><h2>Retrait</h2><p class="small">Les demandes doivent être vérifiées par le serveur.</p></div>
-  <div class="card"><h2>Rendements</h2><p class="small">Les rendements ne sont pas garantis. Prenez connaissance des risques avant tout dépôt.</p></div>
+  <div class="card"><h2>Rendements</h2><p class="small">Les rendements peuvent varier et ne sont pas garantis.</p></div>
 </section>
 
 <section id="activite" class="page hidden">
   <h2 class="section-title">Activité</h2>
-  <div class="card">
-    <h2>Mes transactions</h2>
-    <div id="activity-list" class="small">Connectez-vous pour consulter vos activités.</div>
-    <button class="gold-button full" onclick="loadActivity()">Actualiser</button>
-  </div>
+  <div class="card"><h2>Mes transactions</h2><div id="activity-list" class="small">Connectez-vous pour consulter vos activités.</div><button class="gold-button full" onclick="loadActivity()">Actualiser</button></div>
 </section>
 
 <section id="bassin" class="page hidden">
@@ -314,21 +272,15 @@ td{overflow-wrap:anywhere}
     <button class="gold-button full" onclick="showSection('vip')">Voir les VIP</button>
     <button class="gold-button full" onclick="loadMining()">Actualiser le bassin minier</button>
   </div>
-  <div class="card">
-    <h2>Mes niveaux VIP actifs</h2>
-    <div id="mining-vips">Chargement…</div>
-  </div>
-  <div class="card">
-    <h2>Registres miniers reçus</h2>
-    <div id="mining-received-list">Chargement…</div>
-  </div>
+  <div class="card"><h2>Mes niveaux VIP actifs</h2><div id="mining-vips">Chargement…</div></div>
+  <div class="card"><h2>Récompenses à récupérer</h2><div id="mining-claims">Chargement…</div></div>
+  <div class="card"><h2>Registres miniers reçus</h2><div id="mining-received-list">Chargement…</div></div>
 </section>
 
 <section id="administration" class="page hidden">
   <h2 class="section-title">Administration</h2>
   <div class="card">
-    <h2>Tableau de bord</h2>
-    <div id="admin-message" class="notice"></div>
+    <h2>Tableau de bord</h2><div id="admin-message" class="notice"></div>
     <div class="stat-grid">
       <div class="stat-box">Membres<div class="stat-number" id="admin-members">—</div></div>
       <div class="stat-box">Bloqués<div class="stat-number" id="admin-blocked">—</div></div>
@@ -339,58 +291,13 @@ td{overflow-wrap:anywhere}
     </div>
     <button class="gold-button full" onclick="loadAdminStats()">Actualiser les statistiques</button>
   </div>
-
-  <div class="card">
-    <h2>Gestion des membres</h2>
-    <div class="field"><label>Rechercher un membre</label><input id="member-search" placeholder="Nom ou téléphone"></div>
-    <button class="gold-button full" onclick="loadAdminMembers()">Charger les membres</button>
-    <div id="admin-members-list" class="admin-table-wrap small"></div>
-  </div>
-
-  <div class="card">
-    <h2>Ajuster le solde</h2>
-    <div class="field"><label>UUID du membre</label><input id="adjust-user"></div>
-    <div class="field"><label>Montant positif ou négatif</label><input id="adjust-amount" type="number" step="0.01"></div>
-    <div class="field"><label>Motif obligatoire</label><input id="adjust-reason"></div>
-    <button class="gold-button full" onclick="adminAdjustBalance()">Appliquer l'ajustement</button>
-  </div>
-
-  <div class="card">
-    <h2>Bloquer ou débloquer un membre</h2>
-    <div class="field"><label>UUID du membre</label><input id="block-user"></div>
-    <div class="field"><label>Motif</label><input id="block-reason"></div>
-    <div class="admin-actions">
-      <button class="gold-button" onclick="adminSetBlock(true)">Bloquer</button>
-      <button class="gold-button" onclick="adminSetBlock(false)">Débloquer</button>
-    </div>
-  </div>
-
-  <div class="card">
-    <h2>Demandes de recharge</h2>
-    <button class="gold-button full" onclick="loadAdminDeposits()">Charger les demandes</button>
-    <div id="admin-deposit-list" class="admin-table-wrap small"></div>
-  </div>
-
-  <div class="card">
-    <h2>Demandes de retrait</h2>
-    <button class="gold-button full" onclick="loadAdminWithdrawals()">Charger les demandes</button>
-    <div id="admin-withdrawal-list" class="admin-table-wrap small"></div>
-  </div>
-
-  <div class="card">
-    <h2>Paramètres de parrainage</h2>
-    <div class="field"><label>Niveau 1 (%)</label><input id="ref-level-1" type="number" value="15"></div>
-    <div class="field"><label>Niveau 2 (%)</label><input id="ref-level-2" type="number" value="2"></div>
-    <div class="field"><label>Niveau 3 (%)</label><input id="ref-level-3" type="number" value="1"></div>
-    <button class="gold-button full" onclick="adminSaveReferralSettings()">Enregistrer les taux</button>
-  </div>
-
-  <div class="card">
-    <h2>Modifier mon mot de passe administrateur</h2>
-    <div class="field"><label>Nouveau mot de passe</label><input id="admin-new-password" type="password" minlength="6"></div>
-    <div class="field"><label>Confirmer le nouveau mot de passe</label><input id="admin-confirm-password" type="password" minlength="6"></div>
-    <button class="gold-button full" onclick="adminChangePassword()">Modifier mon mot de passe</button>
-  </div>
+  <div class="card"><h2>Gestion des membres</h2><div class="field"><label>Rechercher un membre</label><input id="member-search" placeholder="Nom ou téléphone"></div><button class="gold-button full" onclick="loadAdminMembers()">Charger les membres</button><div id="admin-members-list" class="admin-table-wrap small"></div></div>
+  <div class="card"><h2>Ajuster le solde</h2><div class="field"><label>UUID du membre</label><input id="adjust-user"></div><div class="field"><label>Montant positif ou négatif</label><input id="adjust-amount" type="number" step="0.01"></div><div class="field"><label>Motif obligatoire</label><input id="adjust-reason"></div><button class="gold-button full" onclick="adminAdjustBalance()">Appliquer l'ajustement</button></div>
+  <div class="card"><h2>Bloquer ou débloquer un membre</h2><div class="field"><label>UUID du membre</label><input id="block-user"></div><div class="field"><label>Motif</label><input id="block-reason"></div><div class="admin-actions"><button class="gold-button" onclick="adminSetBlock(true)">Bloquer</button><button class="gold-button" onclick="adminSetBlock(false)">Débloquer</button></div></div>
+  <div class="card"><h2>Demandes de recharge</h2><button class="gold-button full" onclick="loadAdminDeposits()">Charger les demandes</button><div id="admin-deposit-list" class="admin-table-wrap small"></div></div>
+  <div class="card"><h2>Demandes de retrait</h2><button class="gold-button full" onclick="loadAdminWithdrawals()">Charger les demandes</button><div id="admin-withdrawal-list" class="admin-table-wrap small"></div></div>
+  <div class="card"><h2>Paramètres de parrainage</h2><div class="field"><label>Niveau 1 (%)</label><input id="ref-level-1" type="number" value="15"></div><div class="field"><label>Niveau 2 (%)</label><input id="ref-level-2" type="number" value="2"></div><div class="field"><label>Niveau 3 (%)</label><input id="ref-level-3" type="number" value="1"></div><button class="gold-button full" onclick="adminSaveReferralSettings()">Enregistrer les taux</button></div>
+  <div class="card"><h2>Modifier mon mot de passe administrateur</h2><div class="field"><label>Nouveau mot de passe</label><input id="admin-new-password" type="password" minlength="6"></div><div class="field"><label>Confirmer le nouveau mot de passe</label><input id="admin-confirm-password" type="password" minlength="6"></div><button class="gold-button full" onclick="adminChangePassword()">Modifier mon mot de passe</button></div>
 </section>
 </main>
 
@@ -401,7 +308,6 @@ td{overflow-wrap:anywhere}
   <button data-page="parrainage" onclick="openFeature('parrainage')"><span>👥</span>Invités</button>
   <button data-page="bassin" onclick="openFeature('bassin')"><span>👤</span>Compte</button>
 </nav>
-
 <footer>ETHBTC-USDT · Espace membre<br>Ne partagez jamais votre mot de passe.</footer>
 
 <script>
@@ -414,165 +320,103 @@ const CONFIG={
   minimumWithdrawal:1,
   signupPage:window.location.origin+window.location.pathname
 };
-
 const db=window.supabase.createClient(CONFIG.supabaseUrl,CONFIG.supabaseKey);
-let currentUser=null,currentProfile=null,adminVerified=false;
-let miningTimerInterval=null;
-
+let currentUser=null,currentProfile=null,adminVerified=false,miningTimerInterval=null;
 function el(id){return document.getElementById(id)}
-function message(id,text,type="ok"){
-  const n=el(id);if(!n)return;
-  n.className="notice "+type;n.textContent=text;
-}
+function message(id,text,type="ok"){const n=el(id);if(n){n.className="notice "+type;n.textContent=text}}
 function clearMessage(id){const n=el(id);if(n){n.className="notice";n.textContent=""}}
 function readableError(e){return e?.message||"Une erreur est survenue."}
 function escapeHTML(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
 function money(v){return "$"+Number(v||0).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2})+" (USDT)"}
 function number(v){return Number(v||0)}
+function formatDate(v){if(!v)return "—";const d=new Date(v);return Number.isNaN(d.getTime())?"—":d.toLocaleString("fr-FR")}
 function normalizePhone(cc,raw){
-  let digits=String(raw||"").replace(/\D/g,"");
-  const code=String(cc||"").replace(/\D/g,"");
-  if(!digits)return "";
-  if(digits.startsWith(code))return "+"+digits;
+  let digits=String(raw||"").replace(/\D/g,""),code=String(cc||"").replace(/\D/g,"");
+  if(!digits)return "";if(digits.startsWith(code))return "+"+digits;
   return "+"+code+digits.replace(/^0+/,"");
 }
-
 function setAuthMode(mode){
   const reg=mode==="register";
-  el("register-panel").classList.toggle("hidden",!reg);
-  el("login-panel").classList.toggle("hidden",reg);
-  el("show-register").classList.toggle("active",reg);
-  el("show-login").classList.toggle("active",!reg);
+  el("register-panel").classList.toggle("hidden",!reg);el("login-panel").classList.toggle("hidden",reg);
+  el("show-register").classList.toggle("active",reg);el("show-login").classList.toggle("active",!reg);
   clearMessage("register-message");clearMessage("login-message");
 }
 function openFeature(name){
-  if(!currentUser&&!["home","auth","faq"].includes(name)){
-    showSection("auth");setAuthMode("register");return;
-  }
+  if(!currentUser&&!["home","auth","faq"].includes(name)){showSection("auth");setAuthMode("register");return}
   showSection(name);
 }
 function showSection(name){
   document.querySelectorAll(".page").forEach(s=>s.classList.add("hidden"));
   if(el(name))el(name).classList.remove("hidden");
-
-  // La navigation du bas disparaît sur l'inscription et la connexion.
   el("bottom-nav").classList.toggle("hidden",name==="auth");
-
   document.querySelectorAll(".bottom-nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===name));
-
-  if(name==="vip")loadVIP();
-  if(name==="bassin")refreshProfile();
+  if(name==="vip")loadVIP();if(name==="bassin")refreshProfile();
   if(name==="parrainage"){refreshProfile();loadTeamStats()}
-  if(name==="minier")loadMining();
-  if(name==="retrait")prepareWithdrawalForm();
+  if(name==="minier")loadMining();if(name==="retrait")prepareWithdrawalForm();
   if(name==="activite")loadActivity();
-  if(name==="administration"){
-    if(adminVerified){loadAdminStats();loadAdminMembers()}
-    else message("admin-message","Accès administrateur non vérifié.","err");
-  }
+  if(name==="administration"){if(adminVerified){loadAdminStats();loadAdminMembers()}else message("admin-message","Accès administrateur non vérifié.","err")}
   if(name==="home")refreshAssets();
   window.scrollTo({top:0,behavior:"smooth"});
 }
-el("header-auth").addEventListener("click",()=>{
-  if(currentUser)showSection("dashboard");
-  else{showSection("auth");setAuthMode("register")}
-});
-
-(function initSlider(){
-  const track=el("slider-track"),dots=[...document.querySelectorAll(".slider-dot")];
-  const slides=[...track.children];let index=0;
-  function display(n){
-    index=(n+slides.length)%slides.length;
-    track.style.transform="translateX(-"+index*100+"%)";
-    dots.forEach((d,i)=>d.classList.toggle("active",i===index));
-  }
-  dots.forEach((d,i)=>d.addEventListener("click",()=>display(i)));
-  setInterval(()=>display(index+1),4000);
-})();
+el("header-auth").addEventListener("click",()=>currentUser?showSection("dashboard"):(showSection("auth"),setAuthMode("register")));
 
 async function copyText(value){
   try{await navigator.clipboard.writeText(value);alert("Copié avec succès.")}
   catch(e){alert("Copie impossible. Sélectionnez et copiez manuellement.")}
 }
-
 const refFromURL=new URLSearchParams(location.search).get("ref");
 if(refFromURL)el("referral-input").value=refFromURL.toUpperCase();
 
 el("register-form").addEventListener("submit",async e=>{
   e.preventDefault();clearMessage("register-message");
-  const name=el("full-name").value.trim();
-  const cc=el("country").value;
+  const name=el("full-name").value.trim(),cc=el("country").value;
   const countryName=el("country").selectedOptions[0]?.dataset.country||"";
-  const phone=normalizePhone(cc,el("phone").value);
-  const password=el("reg-password").value;
-  const confirmPassword=el("confirm-password").value;
-  const referral=el("referral-input").value.trim().toUpperCase();
+  const phone=normalizePhone(cc,el("phone").value),password=el("reg-password").value;
+  const confirmPassword=el("confirm-password").value,referral=el("referral-input").value.trim().toUpperCase();
   const button=el("register-button");
-
   if(!/^\+[1-9]\d{7,14}$/.test(phone)){message("register-message","Numéro de téléphone invalide.","err");return}
   if(password.length<6||password!==confirmPassword){message("register-message","Vérifiez le code secret et sa confirmation.","err");return}
-
   button.disabled=true;button.textContent="Création du compte…";
   try{
-    const {data,error}=await db.auth.signUp({
-      phone,password,
-      options:{data:{full_name:name,country_code:cc,country_name:countryName,referral_code_entered:referral||null}}
-    });
+    const {data,error}=await db.auth.signUp({phone,password,options:{data:{full_name:name,country_code:cc,country_name:countryName,referral_code_entered:referral||null}}});
     if(error)throw error;
     if(data.session&&data.user){
-      currentUser=data.user;
-      await ensureProfile(name,phone,cc,countryName,referral);
-      await updateConnectionUI();
-      showSection("dashboard");
-    }else{
-      message("register-message","Compte créé. Une confirmation du numéro peut être nécessaire selon Supabase.");
-    }
+      currentUser=data.user;await ensureProfile(name,phone,cc,countryName,referral);
+      await updateConnectionUI();showSection("dashboard");
+    }else message("register-message","Compte créé. Une confirmation du numéro peut être nécessaire selon Supabase.");
   }catch(error){message("register-message",readableError(error),"err")}
   finally{button.disabled=false;button.textContent="S'inscrire"}
 });
 
 el("login-form").addEventListener("submit",async e=>{
   e.preventDefault();clearMessage("login-message");
-  const phone=normalizePhone(el("login-country").value,el("login-phone").value);
-  const password=el("login-password").value;
-  const button=el("login-button");
+  const phone=normalizePhone(el("login-country").value,el("login-phone").value),password=el("login-password").value,button=el("login-button");
   if(!/^\+[1-9]\d{7,14}$/.test(phone)){message("login-message","Numéro invalide.","err");return}
   button.disabled=true;button.textContent="Connexion…";
   try{
-    const {data,error}=await db.auth.signInWithPassword({phone,password});
-    if(error)throw error;
-    currentUser=data.user;
-    await loadProfile();await updateConnectionUI();
-    el("login-form").reset();showSection("dashboard");
+    const {data,error}=await db.auth.signInWithPassword({phone,password});if(error)throw error;
+    currentUser=data.user;await loadProfile();await updateConnectionUI();el("login-form").reset();showSection("dashboard");
   }catch(error){message("login-message",readableError(error),"err")}
   finally{button.disabled=false;button.textContent="Se connecter"}
 });
 
 async function ensureProfile(name,phone,cc,countryName,referral){
   if(!currentUser)return;
-  const {error}=await db.from("profiles").upsert({
-    id:currentUser.id,full_name:name,phone,country_code:cc,country_name:countryName,updated_at:new Date().toISOString()
-  },{onConflict:"id"});
-  if(error)throw error;
-  await loadProfile();
-
+  const {error}=await db.from("profiles").upsert({id:currentUser.id,full_name:name,phone,country_code:cc,country_name:countryName,updated_at:new Date().toISOString()},{onConflict:"id"});
+  if(error)throw error;await loadProfile();
   if(referral&&!currentProfile?.referred_by){
     const {data:refProfile,error:refError}=await db.from("profiles").select("id").eq("referral_code",referral).maybeSingle();
     if(refError)throw refError;
     if(refProfile&&refProfile.id!==currentUser.id){
       const {error:updateError}=await db.from("profiles").update({referred_by:refProfile.id}).eq("id",currentUser.id);
-      if(updateError)throw updateError;
-      await loadProfile();
+      if(updateError)throw updateError;await loadProfile();
     }
   }
 }
-
 async function loadProfile(){
   if(!currentUser)return;
   const {data,error}=await db.from("profiles").select("*").eq("id",currentUser.id).maybeSingle();
-  if(error)throw error;
-  currentProfile=data||null;
-
+  if(error)throw error;currentProfile=data||null;
   el("profile-name").textContent=currentProfile?.full_name||currentUser.user_metadata?.full_name||"Membre";
   el("profile-phone").textContent=currentProfile?.phone||currentUser.phone||"—";
   el("profile-balance").textContent=money(currentProfile?.withdrawable_balance_usdt??currentProfile?.balance_usdt??0);
@@ -580,206 +424,153 @@ async function loadProfile(){
   el("saved-phone").value=currentProfile?.phone||currentUser.phone||"";
   el("saved-wallet").value=currentProfile?.withdrawal_wallet||"";
   el("saved-network").value=currentProfile?.withdrawal_network||"";
-  updateSignupLink(currentProfile?.referral_code);
-  await updateAssetsFromProfile();
+  updateSignupLink(currentProfile?.referral_code);updateAssetsFromProfile();
 }
-
-async function updateAssetsFromProfile(){
+function updateAssetsFromProfile(){
   if(!currentProfile)return;
   const investment=number(currentProfile.investment_balance_usdt);
-  const withdrawable=number(currentProfile.withdrawable_balance_usdt);
-  let income=0;
-
-  // Seuls les types de transactions reconnus comme revenus sont ajoutés.
-  const incomeTypes=["mining_reward","bonus","referral_commission","vip_reward","daily_reward"];
-  const {data,error}=await db.from("wallet_transactions")
-    .select("amount,transaction_type")
-    .eq("user_id",currentUser.id);
-
-  if(!error&&data){
-    income=data.reduce((sum,row)=>{
-      return incomeTypes.includes(String(row.transaction_type||"").toLowerCase())
-        ?sum+Math.max(0,number(row.amount)):sum;
-    },0);
-  }
-
+  const withdrawable=number(currentProfile.withdrawable_balance_usdt??currentProfile.balance_usdt);
   el("asset-investment").textContent=money(investment);
   el("asset-withdrawable").textContent=money(withdrawable);
-  el("asset-total").textContent=money(investment+withdrawable+income);
+  el("asset-total").textContent=money(investment+withdrawable);
 }
-
 async function refreshAssets(){
-  if(!currentUser){
-    ["asset-total","asset-investment","asset-withdrawable"].forEach(id=>el(id).textContent=money(0));
-    return;
-  }
+  if(!currentUser){["asset-total","asset-investment","asset-withdrawable"].forEach(id=>el(id).textContent=money(0));return}
   try{await loadProfile()}catch(e){console.warn("Actifs:",e)}
 }
 async function refreshProfile(){if(currentUser)try{await loadProfile()}catch(e){console.warn(e)}}
-
 function updateSignupLink(code){
-  const target=el("referral-link-display");
-  if(!target)return;
+  const target=el("referral-link-display");if(!target)return;
   if(!code){target.textContent="Code de parrainage indisponible.";return}
-  const url=new URL(CONFIG.signupPage);
-  url.searchParams.set("ref",code);
-  target.textContent=url.toString();
+  const url=new URL(CONFIG.signupPage);url.searchParams.set("ref",code);target.textContent=url.toString();
 }
 async function copySignupLink(){
   if(!currentUser){alert("Connectez-vous.");return}
   const link=el("referral-link-display").textContent;
-  if(link.startsWith("http"))await copyText(link);
-  else alert("Lien indisponible.");
+  if(link.startsWith("http"))await copyText(link);else alert("Lien indisponible.");
 }
-
 el("profile-form").addEventListener("submit",async e=>{
   e.preventDefault();clearMessage("profile-message");
   if(!currentUser){message("profile-message","Connectez-vous d'abord.","err");return}
   try{
     const {error}=await db.from("profiles").update({
-      full_name:el("saved-name").value.trim(),
-      phone:el("saved-phone").value.trim(),
-      withdrawal_wallet:el("saved-wallet").value.trim(),
-      withdrawal_network:el("saved-network").value,
+      full_name:el("saved-name").value.trim(),phone:el("saved-phone").value.trim(),
+      withdrawal_wallet:el("saved-wallet").value.trim(),withdrawal_network:el("saved-network").value,
       updated_at:new Date().toISOString()
     }).eq("id",currentUser.id);
-    if(error)throw error;
-    await loadProfile();message("profile-message","Informations enregistrées.");
+    if(error)throw error;await loadProfile();message("profile-message","Informations enregistrées.");
   }catch(error){message("profile-message",readableError(error),"err")}
 });
-
 async function updateConnectionUI(){
   el("header-auth").textContent=currentUser?"Mon espace":"Inscription / Connexion";
-  adminVerified=false;el("admin-open").classList.add("hidden");
-  if(!currentUser)return;
+  adminVerified=false;el("admin-open").classList.add("hidden");if(!currentUser)return;
   try{
-    const {data,error}=await db.from("user_roles").select("role")
-      .eq("user_id",currentUser.id).eq("role","admin").maybeSingle();
+    const {data,error}=await db.from("user_roles").select("role").eq("user_id",currentUser.id).eq("role","admin").maybeSingle();
     if(!error&&data){adminVerified=true;el("admin-open").classList.remove("hidden")}
   }catch(e){console.warn("Vérification admin:",e)}
 }
-
 async function logout(){
-  const {error}=await db.auth.signOut();
-  if(error){alert(readableError(error));return}
-  currentUser=null;currentProfile=null;adminVerified=false;
-  showSection("home");await updateConnectionUI();
+  const {error}=await db.auth.signOut();if(error){alert(readableError(error));return}
+  currentUser=null;currentProfile=null;adminVerified=false;showSection("home");await updateConnectionUI();
 }
 
-/* VIP */
+/* VIP : données lues depuis Supabase */
 async function loadVIP(){
   const target=el("vip-list");target.textContent="Chargement des VIP…";
   try{
-    const {data,error}=await db.from("vip_levels")
-      .select("id,name,description,level,price,min_amount,max_amount,active,daily_return_percent")
-      .eq("active",true).order("level",{ascending:true});
-    if(error)throw error;
-    target.textContent="";
+    const {data,error}=await db.from("vip_levels").select("id,name,description,level,price,min_amount,max_amount,active,daily_return_percent").eq("active",true).order("level",{ascending:true});
+    if(error)throw error;target.textContent="";
     if(!data?.length){target.textContent="Aucun VIP actif disponible.";return}
-
     data.forEach(v=>{
       const card=document.createElement("div");card.className="card vip-card";
       const title=document.createElement("h3");title.textContent=(v.name||"VIP")+" — Niveau "+(v.level??"—");
       const desc=document.createElement("p");desc.textContent=v.description||"Niveau VIP";
       const price=document.createElement("div");price.className="vip-price";price.textContent=money(v.price);
       const info=document.createElement("div");info.className="vip-info";
-      info.innerHTML=
-        "<p>Montant minimum : "+escapeHTML(money(v.min_amount))+"</p>"+
-        "<p>Montant maximum : "+escapeHTML(money(v.max_amount))+"</p>"+
-        "<p>Taux journalier indicatif : "+escapeHTML(v.daily_return_percent??"—")+" %</p>"+
-        "<p>Durée indicative : 100 jours</p>";
+      info.innerHTML="<p>Montant minimum : "+escapeHTML(money(v.min_amount))+"</p><p>Montant maximum : "+escapeHTML(money(v.max_amount))+"</p><p>Taux journalier indicatif : "+escapeHTML(v.daily_return_percent??"—")+" %</p><p>Durée indicative : 100 jours</p>";
       const btn=document.createElement("button");btn.className="gold-button full";btn.textContent="Recharger";
-      btn.onclick=()=>{
-        if(!currentUser){showSection("auth");return}
-        el("deposit-amount").value=v.min_amount??v.price??"";
-        showSection("depot");
-      };
+      btn.onclick=()=>{if(!currentUser){showSection("auth");return}el("deposit-amount").value=v.min_amount??v.price??"";showSection("depot")};
       card.append(title,desc,price,info,btn);target.appendChild(card);
     });
-  }catch(error){
-    console.error(error);
-    target.textContent="Impossible de charger les VIP : "+readableError(error);
-  }
+  }catch(error){console.error(error);target.textContent="Impossible de charger les VIP : "+readableError(error)}
 }
-
 async function hasActiveVIP(){
   if(!currentUser)return false;
-  const {data,error}=await db.from("user_vips").select("id")
-    .eq("user_id",currentUser.id).eq("status","active").limit(1);
-  if(error)throw error;
-  return !!data?.length;
+  const {data,error}=await db.from("user_vips").select("id").eq("user_id",currentUser.id).eq("status","active").limit(1);
+  if(error)throw error;return !!data?.length;
 }
 
-/* COMPTE À REBOURS MINIER */
-function startMiningCountdown(activationDates){
+/* COMPTE À REBOURS DES RÉCOMPENSES */
+function countdownText(dateValue){
+  const remaining=new Date(dateValue).getTime()-Date.now();
+  if(!Number.isFinite(remaining))return "Échéance inconnue";
+  if(remaining<=0)return "Récompense disponible";
+  const h=Math.floor(remaining/3600000),m=Math.floor((remaining%3600000)/60000),s=Math.floor((remaining%60000)/1000);
+  return "Disponible dans "+String(h).padStart(2,"0")+":"+String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+}
+function startMiningCountdown(){
   if(miningTimerInterval)clearInterval(miningTimerInterval);
-  const target=el("mining-timer");
-  if(!activationDates.length){target.textContent="Aucun VIP actif";return}
-
-  function tick(){
-    const now=Date.now();
-    let remaining=24*60*60*1000;
-    activationDates.forEach(date=>{
-      const start=new Date(date).getTime();
-      if(Number.isFinite(start)){
-        const r=Math.max(0,start+24*60*60*1000-now);
-        remaining=Math.min(remaining,r);
-      }
+  const update=()=>{
+    document.querySelectorAll("[data-claim-date]").forEach(node=>{
+      const date=node.dataset.claimDate;
+      node.textContent=countdownText(date);
+      const button=document.querySelector('[data-claim-button="'+node.dataset.claimId+'"]');
+      if(button)button.disabled=new Date(date).getTime()>Date.now()||button.dataset.busy==="true";
     });
-    const h=Math.floor(remaining/3600000);
-    const m=Math.floor((remaining%3600000)/60000);
-    const s=Math.floor((remaining%60000)/1000);
-    target.textContent=remaining===0?"Période de 24 h écoulée — vérification serveur requise":
-      "Prochaine échéance : "+String(h).padStart(2,"0")+":"+String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+  };
+  update();miningTimerInterval=setInterval(update,1000);
+}
+
+/* RÉCOMPENSES MINIÈRES */
+async function claimMiningReward(userVipId,button){
+  if(!currentUser){alert("Connectez-vous d'abord.");return}
+  if(button.disabled)return;
+  button.disabled=true;button.dataset.busy="true";button.textContent="RÉCUPÉRATION…";
+  try{
+    // Le paramètre attendu par la fonction SQL est p_user_vip_id.
+    const {data,error}=await db.rpc("claim_mining_reward",{p_user_vip_id:userVipId});
+    if(error)throw error;
+    if(data&&typeof data==="object"&&data.success===false)throw new Error(data.message||"La récupération a échoué.");
+    message("mining-status",data?.message||"Demande de récupération traitée par Supabase.");
+    await loadProfile();
+    await loadMining();
+  }catch(error){
+    message("mining-status","Récupération impossible : "+readableError(error),"err");
+    button.disabled=false;button.dataset.busy="false";button.textContent="RÉCUPÉRER";
   }
-  tick();miningTimerInterval=setInterval(tick,1000);
 }
 
 async function loadMining(){
-  const target=el("mining-status");
-  const vipTarget=el("mining-vips");
-  const received=el("mining-received-list");
-
+  const target=el("mining-status"),vipTarget=el("mining-vips");
+  const received=el("mining-received-list"),claimsTarget=el("mining-claims");
   if(!currentUser){
-    el("mining-power").textContent="0.00 GH/s";
-    el("mining-daily").textContent=money(0);
+    el("mining-power").textContent="0.00 GH/s";el("mining-daily").textContent=money(0);
     target.textContent="Connectez-vous pour consulter votre activité minière.";
     vipTarget.textContent="Connectez-vous pour consulter vos VIP.";
+    claimsTarget.textContent="Connectez-vous pour voir vos récompenses.";
     received.textContent="Connectez-vous pour voir vos revenus reçus.";
-    el("mining-timer").textContent="--:--:--";
-    return;
+    el("mining-timer").textContent="--:--:--";return;
   }
-
-  vipTarget.textContent="Chargement…";received.textContent="Chargement…";
+  vipTarget.textContent="Chargement…";received.textContent="Chargement…";claimsTarget.textContent="Chargement…";
   try{
     const {data:vips,error}=await db.from("user_vips")
       .select("id,status,activated_at,expires_at,investment_amount,vip_level_id")
       .eq("user_id",currentUser.id).eq("status","active");
     if(error)throw error;
-
-    let daily=0,power=0;
-    const activationDates=[];
-    vipTarget.textContent="";
-
-    for(const vip of (vips||[])){
+    let daily=0,power=0;vipTarget.textContent="";
+    for(const vip of(vips||[])){
       const {data:level,error:levelError}=await db.from("vip_levels")
         .select("id,name,level,min_amount,max_amount,daily_return_percent,description")
         .eq("id",vip.vip_level_id).maybeSingle();
-
       if(levelError)console.warn(levelError);
-      const investment=number(vip.investment_amount);
-      const rate=number(level?.daily_return_percent);
+      const investment=number(vip.investment_amount),rate=number(level?.daily_return_percent);
       daily+=investment*rate/100;
-      activationDates.push(vip.activated_at);
-
       const match=String(level?.description||"").match(/([\d.]+)\s*GH\/s/i);
       if(match)power+=number(match[1]);
-
       const box=document.createElement("div");box.className="vip-level-box";
-      box.innerHTML=
-        "<strong>"+escapeHTML(level?.name||"VIP")+"</strong>"+
+      box.innerHTML="<strong>"+escapeHTML(level?.name||"VIP")+"</strong>"+
         "<p>Niveau : "+escapeHTML(level?.level??"—")+"</p>"+
-        "<p>Montant déposé : "+escapeHTML(money(investment))+"</p>"+
+        "<p>Montant investi : "+escapeHTML(money(investment))+"</p>"+
         "<p>Fourchette : "+escapeHTML(money(level?.min_amount))+" à "+escapeHTML(money(level?.max_amount))+"</p>"+
         "<p>Taux journalier indicatif : "+escapeHTML(rate)+" %</p>"+
         "<p>Durée indicative : 100 jours</p>"+
@@ -787,97 +578,97 @@ async function loadMining(){
         "<p>Expire le : "+escapeHTML(formatDate(vip.expires_at))+"</p>";
       vipTarget.appendChild(box);
     }
-
     el("mining-power").textContent=power.toFixed(2)+" GH/s";
     el("mining-daily").textContent=money(daily);
-    startMiningCountdown(activationDates.filter(Boolean));
+    el("mining-timer").textContent=vips?.length?"Consultez les échéances de vos récompenses ci-dessous.":"Aucun VIP actif";
 
-    // CORRECTION : la colonne description n'est pas demandée.
-    const {data:transactions,error:txError}=await db.from("wallet_transactions")
-      .select("id,amount,transaction_type,created_at")
+    // Lire les demandes en attente directement depuis mining_claims.
+    const {data:claims,error:claimError}=await db.from("mining_claims")
+      .select("id,user_id,user_vip_id,amount,available_at,claimed_at,status")
       .eq("user_id",currentUser.id)
-      .eq("transaction_type","mining_reward")
-      .order("created_at",{ascending:false}).limit(100);
+      .in("status",["waiting","available"])
+      .order("available_at",{ascending:true});
+    if(claimError)throw claimError;
 
-    if(txError)throw txError;
+    claimsTarget.textContent="";
+    // La fonction SQL réclame la dernière ligne en attente du VIP (ORDER BY id DESC).
+    // On n'affiche donc qu'une seule ligne, la plus récente, par abonnement VIP.
+    const latestByVip=new Map();
+    (claims||[]).forEach(row=>{
+      const key=String(row.user_vip_id),previous=latestByVip.get(key);
+      if(!previous||Number(row.id)>Number(previous.id))latestByVip.set(key,row);
+    });
+    const visibleClaims=[...latestByVip.values()].sort((a,b)=>new Date(a.available_at)-new Date(b.available_at));
 
-    received.textContent="";
-    if(!transactions?.length){
-      received.textContent="Aucun revenu minier reçu.";
+    if(!visibleClaims.length){
+      claimsTarget.textContent="Aucune récompense en attente pour le moment.";
     }else{
-      transactions.forEach(r=>{
+      visibleClaims.forEach(row=>{
         const box=document.createElement("div");box.className="mining-record";
-        box.innerHTML="<div class='record-row'><span>Revenu reçu</span><strong>"+escapeHTML(money(r.amount))+"</strong></div>"+
-          "<div class='record-row'><span>Date</span><strong>"+escapeHTML(formatDate(r.created_at))+"</strong></div>";
-        received.appendChild(box);
+        box.innerHTML="<div class='record-row'><span>Récompense disponible</span><strong>"+escapeHTML(money(row.amount))+"</strong></div>"+
+          "<div class='record-row'><span>Échéance</span><strong>"+escapeHTML(formatDate(row.available_at))+"</strong></div>"+
+          "<div class='record-row'><span>Statut</span><strong>"+escapeHTML(row.status)+"</strong></div>"+
+          "<div class='timer' data-claim-date='"+escapeHTML(row.available_at)+"' data-claim-id='"+escapeHTML(row.id)+"'></div>";
+        const button=document.createElement("button");
+        button.className="claim-button";button.textContent="RÉCUPÉRER";
+        button.dataset.claimButton=String(row.id);button.dataset.busy="false";
+        button.disabled=new Date(row.available_at).getTime()>Date.now();
+        button.addEventListener("click",()=>claimMiningReward(row.user_vip_id,button));
+        box.appendChild(button);claimsTarget.appendChild(box);
       });
     }
+    startMiningCountdown();
 
-    target.textContent=vips?.length
-      ?"Vos VIP actifs et revenus indicatifs sont affichés. Les récompenses doivent être confirmées par Supabase."
-      :"Aucun VIP actif trouvé.";
+    const {data:transactions,error:txError}=await db.from("wallet_transactions")
+      .select("id,amount,transaction_type,created_at")
+      .eq("user_id",currentUser.id).eq("transaction_type","mining_reward")
+      .order("created_at",{ascending:false}).limit(100);
+    if(txError)throw txError;
+    received.textContent="";
+    if(!transactions?.length)received.textContent="Aucun revenu minier reçu.";
+    else transactions.forEach(r=>{
+      const box=document.createElement("div");box.className="mining-record";
+      box.innerHTML="<div class='record-row'><span>Revenu reçu</span><strong>"+escapeHTML(money(r.amount))+"</strong></div>"+
+        "<div class='record-row'><span>Date</span><strong>"+escapeHTML(formatDate(r.created_at))+"</strong></div>";
+      received.appendChild(box);
+    });
+    target.textContent=vips?.length?"Vos VIP actifs et vos récompenses enregistrées dans Supabase sont affichés.":"Aucun VIP actif trouvé.";
   }catch(error){
     target.textContent="Lecture impossible : "+readableError(error);
     vipTarget.textContent="Impossible de charger les VIP actifs.";
+    claimsTarget.textContent="Impossible de charger les récompenses : "+readableError(error);
     received.textContent="Impossible de charger les revenus reçus.";
   }
 }
 
-function formatDate(value){
-  if(!value)return "—";
-  const d=new Date(value);
-  return Number.isNaN(d.getTime())?"—":d.toLocaleString("fr-FR");
-}
-
 /* PARRAINAGE */
 async function loadTeamStats(){
-  if(!currentUser){
-    ["team-registered","team-validated","team-commissions"].forEach(id=>el(id).textContent="0");
-    return;
-  }
+  if(!currentUser){["team-registered","team-validated","team-commissions"].forEach(id=>el(id).textContent="0");return}
   try{
     const {data,error}=await db.from("profiles").select("id").eq("referred_by",currentUser.id);
-    if(error)throw error;
-    const ids=(data||[]).map(x=>x.id);
-    el("team-registered").textContent=ids.length;
-
+    if(error)throw error;const ids=(data||[]).map(x=>x.id);el("team-registered").textContent=ids.length;
     if(!ids.length)el("team-validated").textContent="0";
     else{
-      const {data:deps,error:depError}=await db.from("deposit_requests")
-        .select("user_id").in("user_id",ids).eq("status","approved");
-      if(depError)throw depError;
-      el("team-validated").textContent=new Set((deps||[]).map(x=>x.user_id)).size;
+      const {data:deps,error:depError}=await db.from("deposit_requests").select("user_id").in("user_id",ids).eq("status","approved");
+      if(depError)throw depError;el("team-validated").textContent=new Set((deps||[]).map(x=>x.user_id)).size;
     }
-
-    const {data:comm,error:commError}=await db.from("referral_commissions")
-      .select("commission_amount").eq("beneficiary_id",currentUser.id);
+    const {data:comm,error:commError}=await db.from("referral_commissions").select("commission_amount").eq("beneficiary_id",currentUser.id);
     if(commError)throw commError;
     el("team-commissions").textContent=money((comm||[]).reduce((s,x)=>s+number(x.commission_amount),0));
-  }catch(error){
-    el("team-registered").textContent="Indisponible";
-    el("team-validated").textContent="Indisponible";
-    el("team-commissions").textContent="Indisponible";
-  }
+  }catch(error){el("team-registered").textContent="Indisponible";el("team-validated").textContent="Indisponible";el("team-commissions").textContent="Indisponible"}
 }
 
 /* DÉPÔT */
 el("deposit-form").addEventListener("submit",async e=>{
   e.preventDefault();clearMessage("deposit-message");
   if(!currentUser){message("deposit-message","Connectez-vous d'abord.","err");return}
-  const amount=number(el("deposit-amount").value);
-  const network=el("deposit-method").value;
-  const reference=el("deposit-reference").value.trim();
-  const button=el("deposit-button");
+  const amount=number(el("deposit-amount").value),network=el("deposit-method").value;
+  const reference=el("deposit-reference").value.trim(),button=el("deposit-button");
   if(amount<=0){message("deposit-message","Montant invalide.","err");return}
   button.disabled=true;button.textContent="Envoi…";
   try{
-    const {error}=await db.from("deposit_requests").insert({
-      user_id:currentUser.id,amount,currency:"USDT",network,
-      transaction_reference:reference||null,status:"pending"
-    });
-    if(error)throw error;
-    message("deposit-message","Demande envoyée. Elle sera vérifiée avant validation.");
-    el("deposit-form").reset();
+    const {error}=await db.from("deposit_requests").insert({user_id:currentUser.id,amount,currency:"USDT",network,transaction_reference:reference||null,status:"pending"});
+    if(error)throw error;message("deposit-message","Demande envoyée. Elle sera vérifiée avant validation.");el("deposit-form").reset();
   }catch(error){message("deposit-message",readableError(error),"err")}
   finally{button.disabled=false;button.textContent="Envoyer la demande"}
 });
@@ -885,29 +676,19 @@ el("deposit-form").addEventListener("submit",async e=>{
 /* RETRAIT */
 async function prepareWithdrawalForm(){
   if(!currentUser)return;
-  try{
-    await loadProfile();
-    el("withdraw-name").value=currentProfile?.full_name||"";
-    el("withdraw-phone").value=currentProfile?.phone||"";
-    el("withdraw-destination").value=currentProfile?.withdrawal_wallet||"";
-    updateWithdrawalFields();updateWithdrawalPreview();
-  }catch(e){console.warn(e)}
+  try{await loadProfile();el("withdraw-name").value=currentProfile?.full_name||"";el("withdraw-phone").value=currentProfile?.phone||"";el("withdraw-destination").value=currentProfile?.withdrawal_wallet||"";updateWithdrawalFields();updateWithdrawalPreview()}
+  catch(e){console.warn(e)}
 }
 function updateWithdrawalFields(){
   const mobile=["AIRTEL","ORANGE","VODACOM"].includes(el("withdraw-method").value);
-  el("withdraw-phone").required=mobile;
-  el("withdraw-destination").required=!mobile;
+  el("withdraw-phone").required=mobile;el("withdraw-destination").required=!mobile;
 }
 el("withdraw-method").addEventListener("change",updateWithdrawalFields);
-
 function updateWithdrawalPreview(){
   const amount=number(el("withdraw-amount").value);
-  el("withdraw-fee-preview").textContent=amount>=CONFIG.minimumWithdrawal?
-    "Frais estimés : "+money(amount*CONFIG.withdrawalFee)+" · Net : "+money(amount*(1-CONFIG.withdrawalFee)):
-    "Frais estimés : —";
+  el("withdraw-fee-preview").textContent=amount>=CONFIG.minimumWithdrawal?"Frais estimés : "+money(amount*CONFIG.withdrawalFee)+" · Net : "+money(amount*(1-CONFIG.withdrawalFee)):"Frais estimés : —";
 }
 el("withdraw-amount").addEventListener("input",updateWithdrawalPreview);
-
 el("withdraw-form").addEventListener("submit",async e=>{
   e.preventDefault();clearMessage("withdraw-message");
   if(!currentUser){message("withdraw-message","Connectez-vous d'abord.","err");return}
@@ -922,8 +703,7 @@ el("withdraw-form").addEventListener("submit",async e=>{
 
 /* ACTIVITÉ */
 async function loadActivity(){
-  const target=el("activity-list");
-  if(!currentUser){target.textContent="Connectez-vous.";return}
+  const target=el("activity-list");if(!currentUser){target.textContent="Connectez-vous.";return}
   target.textContent="Chargement…";
   try{
     const [dep,wd,tx]=await Promise.all([
@@ -932,186 +712,109 @@ async function loadActivity(){
       db.from("wallet_transactions").select("id,amount,transaction_type,created_at").eq("user_id",currentUser.id).order("created_at",{ascending:false}).limit(20)
     ]);
     if(dep.error)throw dep.error;if(wd.error)throw wd.error;if(tx.error)throw tx.error;
-
     const rows=[
       ...(dep.data||[]).map(x=>({date:x.created_at,type:"Recharge",amount:x.amount,status:x.status})),
       ...(wd.data||[]).map(x=>({date:x.created_at,type:"Retrait",amount:x.amount,status:x.status})),
       ...(tx.data||[]).map(x=>({date:x.created_at,type:x.transaction_type,amount:x.amount,status:"Enregistré"}))
     ].sort((a,b)=>new Date(b.date)-new Date(a.date));
-
     if(!rows.length){target.textContent="Aucune activité enregistrée.";return}
     target.innerHTML="<div class='admin-table-wrap'><table><thead><tr><th>Date</th><th>Type</th><th>Montant</th><th>État</th></tr></thead><tbody>"+
-      rows.map(x=>"<tr><td>"+escapeHTML(formatDate(x.date))+"</td><td>"+escapeHTML(x.type)+"</td><td>"+escapeHTML(money(x.amount))+"</td><td>"+escapeHTML(x.status)+"</td></tr>").join("")+
-      "</tbody></table></div>";
+      rows.map(x=>"<tr><td>"+escapeHTML(formatDate(x.date))+"</td><td>"+escapeHTML(x.type)+"</td><td>"+escapeHTML(money(x.amount))+"</td><td>"+escapeHTML(x.status)+"</td></tr>").join("")+"</tbody></table></div>";
   }catch(error){target.textContent="Activité indisponible : "+readableError(error)}
 }
 
 /* ADMINISTRATION */
-async function requireAdmin(){
-  if(!currentUser||!adminVerified)throw new Error("Accès administrateur refusé.");
-}
-async function adminCall(name,args={}){
-  await requireAdmin();
-  const {data,error}=await db.rpc(name,args);
-  if(error)throw error;
-  return data;
-}
+async function requireAdmin(){if(!currentUser||!adminVerified)throw new Error("Accès administrateur refusé.")}
+async function adminCall(name,args={}){await requireAdmin();const {data,error}=await db.rpc(name,args);if(error)throw error;return data}
 async function loadAdminStats(){
   try{
-    const data=await adminCall("admin_dashboard_stats");
-    const s=typeof data==="string"?JSON.parse(data):data;
-    el("admin-members").textContent=s.total_members??"—";
-    el("admin-blocked").textContent=s.blocked_members??"—";
-    el("admin-depositors").textContent=s.depositors??"—";
-    el("admin-deposits").textContent=money(s.total_deposited);
-    el("admin-withdrawals").textContent=money(s.total_withdrawn);
-    el("admin-vips").textContent=s.active_vips??"—";
+    const data=await adminCall("admin_dashboard_stats"),s=typeof data==="string"?JSON.parse(data):data;
+    el("admin-members").textContent=s.total_members??"—";el("admin-blocked").textContent=s.blocked_members??"—";
+    el("admin-depositors").textContent=s.depositors??"—";el("admin-deposits").textContent=money(s.total_deposited);
+    el("admin-withdrawals").textContent=money(s.total_withdrawn);el("admin-vips").textContent=s.active_vips??"—";
     message("admin-message","Statistiques chargées.");
   }catch(error){message("admin-message","Statistiques indisponibles : "+readableError(error),"err")}
 }
-
 async function loadAdminMembers(){
   const target=el("admin-members-list");target.textContent="Chargement…";
   try{
-    const data=await adminCall("admin_list_members");
-    const rows=Array.isArray(data)?data:(typeof data==="string"?JSON.parse(data):[]);
+    const data=await adminCall("admin_list_members"),rows=Array.isArray(data)?data:(typeof data==="string"?JSON.parse(data):[]);
     const q=el("member-search").value.trim().toLowerCase();
-    const filtered=rows.filter(m=>
-      String(m.full_name||"").toLowerCase().includes(q)||
-      String(m.phone||"").toLowerCase().includes(q)
-    );
+    const filtered=rows.filter(m=>String(m.full_name||"").toLowerCase().includes(q)||String(m.phone||"").toLowerCase().includes(q));
     if(!filtered.length){target.textContent="Aucun membre trouvé.";return}
-
-    target.innerHTML="<table><thead><tr>"+
-      "<th>UUID</th><th>Nom</th><th>Téléphone</th><th>Solde</th><th>VIP</th><th>Invités</th><th>Bloqué</th><th>Action</th>"+
-      "</tr></thead><tbody>"+filtered.map(m=>
-      "<tr><td>"+escapeHTML(m.member_id)+"</td>"+
-      "<td>"+escapeHTML(m.full_name)+"</td>"+
-      "<td>"+escapeHTML(m.phone)+"</td>"+
-      "<td>"+escapeHTML(money(m.balance))+"</td>"+
-      "<td>"+escapeHTML(m.vip_status??m.active_vips??"—")+"</td>"+
-      "<td>"+escapeHTML(m.invited_count??"—")+"</td>"+
-      "<td>"+(m.blocked?"Oui":"Non")+"</td>"+
-      "<td><button class='copy-button' data-member='"+escapeHTML(m.member_id)+"'>Choisir</button></td></tr>"
-    ).join("")+"</tbody></table>";
-
-    target.querySelectorAll("[data-member]").forEach(b=>b.addEventListener("click",()=>{
-      el("adjust-user").value=b.dataset.member;
-      el("block-user").value=b.dataset.member;
-    }));
+    target.innerHTML="<table><thead><tr><th>UUID</th><th>Nom</th><th>Téléphone</th><th>Solde</th><th>VIP</th><th>Invités</th><th>Bloqué</th><th>Action</th></tr></thead><tbody>"+
+      filtered.map(m=>"<tr><td>"+escapeHTML(m.member_id)+"</td><td>"+escapeHTML(m.full_name)+"</td><td>"+escapeHTML(m.phone)+"</td><td>"+escapeHTML(money(m.balance))+"</td><td>"+escapeHTML(m.vip_status??m.active_vips??"—")+"</td><td>"+escapeHTML(m.invited_count??"—")+"</td><td>"+(m.blocked?"Oui":"Non")+"</td><td><button class='copy-button' data-member='"+escapeHTML(m.member_id)+"'>Choisir</button></td></tr>").join("")+"</tbody></table>";
+    target.querySelectorAll("[data-member]").forEach(b=>b.addEventListener("click",()=>{el("adjust-user").value=b.dataset.member;el("block-user").value=b.dataset.member}));
   }catch(error){target.textContent="Liste indisponible : "+readableError(error)}
 }
-
 async function adminAdjustBalance(){
   try{
-    const user=el("adjust-user").value.trim();
-    const amount=Number(el("adjust-amount").value);
-    const reason=el("adjust-reason").value.trim();
+    const user=el("adjust-user").value.trim(),amount=Number(el("adjust-amount").value),reason=el("adjust-reason").value.trim();
     if(!user||!Number.isFinite(amount)||amount===0||!reason)throw new Error("Remplissez tous les champs.");
     const result=await adminCall("admin_adjust_balance",{p_user_id:user,p_amount:amount,p_reason:reason});
-    message("admin-message","Ajustement terminé : "+JSON.stringify(result));
-    await loadAdminStats();await loadAdminMembers();
+    message("admin-message","Ajustement terminé : "+JSON.stringify(result));await loadAdminStats();await loadAdminMembers();
   }catch(error){message("admin-message",readableError(error),"err")}
 }
-
 async function adminSetBlock(blocked){
   try{
-    const user=el("block-user").value.trim();
-    const reason=el("block-reason").value.trim();
+    const user=el("block-user").value.trim(),reason=el("block-reason").value.trim();
     if(!user)throw new Error("UUID obligatoire.");
     const result=await adminCall("admin_set_member_block",{p_user_id:user,p_blocked:blocked,p_reason:reason||null});
-    message("admin-message",JSON.stringify(result));
-    await loadAdminMembers();
+    message("admin-message",JSON.stringify(result));await loadAdminMembers();
   }catch(error){message("admin-message",readableError(error),"err")}
 }
-
 function tableForRequests(rows){
   if(!rows?.length)return "Aucune demande.";
   return "<table><thead><tr><th>ID</th><th>Membre</th><th>Montant</th><th>État</th><th>Actions</th></tr></thead><tbody>"+
-    rows.map(r=>"<tr><td>"+escapeHTML(r.id)+"</td><td>"+escapeHTML(r.user_id)+"</td><td>"+escapeHTML(money(r.amount))+"</td><td>"+escapeHTML(r.status)+"</td><td>"+
-      (r.status==="pending"?"<button class='copy-button' data-approve='"+escapeHTML(r.id)+"'>Approuver</button> <button class='copy-button' data-reject='"+escapeHTML(r.id)+"'>Refuser</button>":"Traité")+
-      "</td></tr>").join("")+"</tbody></table>";
+    rows.map(r=>"<tr><td>"+escapeHTML(r.id)+"</td><td>"+escapeHTML(r.user_id)+"</td><td>"+escapeHTML(money(r.amount))+"</td><td>"+escapeHTML(r.status)+"</td><td>"+(r.status==="pending"?"<button class='copy-button' data-approve='"+escapeHTML(r.id)+"'>Approuver</button> <button class='copy-button' data-reject='"+escapeHTML(r.id)+"'>Refuser</button>":"Traité")+"</td></tr>").join("")+"</tbody></table>";
 }
-
 async function loadAdminDeposits(){
   const target=el("admin-deposit-list");target.textContent="Chargement…";
   try{
-    await requireAdmin();
-    const {data,error}=await db.from("deposit_requests")
-      .select("id,user_id,amount,currency,status,created_at")
-      .order("created_at",{ascending:false}).limit(100);
-    if(error)throw error;
-    target.innerHTML=tableForRequests(data);
+    await requireAdmin();const {data,error}=await db.from("deposit_requests").select("id,user_id,amount,currency,status,created_at").order("created_at",{ascending:false}).limit(100);
+    if(error)throw error;target.innerHTML=tableForRequests(data);
     target.querySelectorAll("[data-approve]").forEach(b=>b.onclick=()=>reviewDeposit(b.dataset.approve,true));
     target.querySelectorAll("[data-reject]").forEach(b=>b.onclick=()=>reviewDeposit(b.dataset.reject,false));
   }catch(error){target.textContent=readableError(error)}
 }
-
 async function reviewDeposit(id,approve){
   if(!confirm(approve?"Approuver cette recharge ?":"Refuser cette recharge ?"))return;
-  try{
-    const result=await adminCall("admin_review_deposit",{p_deposit_id:id,p_approve:approve});
-    message("admin-message",JSON.stringify(result));
-    await loadAdminDeposits();await loadAdminStats();
-  }catch(error){message("admin-message",readableError(error),"err")}
+  try{const result=await adminCall("admin_review_deposit",{p_deposit_id:id,p_approve:approve});message("admin-message",JSON.stringify(result));await loadAdminDeposits();await loadAdminStats()}
+  catch(error){message("admin-message",readableError(error),"err")}
 }
-
 async function loadAdminWithdrawals(){
   const target=el("admin-withdrawal-list");target.textContent="Chargement…";
   try{
-    await requireAdmin();
-    const {data,error}=await db.from("withdrawal_requests")
-      .select("id,user_id,amount,currency,status,created_at")
-      .order("created_at",{ascending:false}).limit(100);
-    if(error)throw error;
-    target.innerHTML=tableForRequests(data);
+    await requireAdmin();const {data,error}=await db.from("withdrawal_requests").select("id,user_id,amount,currency,status,created_at").order("created_at",{ascending:false}).limit(100);
+    if(error)throw error;target.innerHTML=tableForRequests(data);
     target.querySelectorAll("[data-approve]").forEach(b=>b.onclick=()=>reviewWithdrawal(b.dataset.approve,true));
     target.querySelectorAll("[data-reject]").forEach(b=>b.onclick=()=>reviewWithdrawal(b.dataset.reject,false));
   }catch(error){target.textContent=readableError(error)}
 }
-
 async function reviewWithdrawal(id,approve){
   if(!confirm(approve?"Approuver ce retrait ?":"Refuser et rembourser ce retrait ?"))return;
   try{
-    const result=await adminCall("admin_review_withdrawal",{
-      p_withdrawal_id:id,p_approve:approve,p_reason:approve?null:"Refus administrateur"
-    });
-    message("admin-message",JSON.stringify(result));
-    await loadAdminWithdrawals();await loadAdminStats();
+    const result=await adminCall("admin_review_withdrawal",{p_withdrawal_id:id,p_approve:approve,p_reason:approve?null:"Refus administrateur"});
+    message("admin-message",JSON.stringify(result));await loadAdminWithdrawals();await loadAdminStats();
   }catch(error){message("admin-message",readableError(error),"err")}
 }
-
 async function adminSaveReferralSettings(){
   try{
-    await requireAdmin();
-    const l1=Number(el("ref-level-1").value);
-    const l2=Number(el("ref-level-2").value);
-    const l3=Number(el("ref-level-3").value);
+    await requireAdmin();const l1=Number(el("ref-level-1").value),l2=Number(el("ref-level-2").value),l3=Number(el("ref-level-3").value);
     if([l1,l2,l3].some(x=>!Number.isFinite(x)||x<0||x>100))throw new Error("Taux invalide.");
-
     const {data:rows,error:readError}=await db.from("referral_settings").select("id").order("id").limit(1);
-    if(readError)throw readError;
-    if(!rows?.length)throw new Error("Aucun paramètre existant.");
-
-    const {error}=await db.from("referral_settings").update({
-      level_1_percent:l1,level_2_percent:l2,level_3_percent:l3,updated_at:new Date().toISOString()
-    }).eq("id",rows[0].id);
-    if(error)throw error;
-    message("admin-message","Paramètres de parrainage enregistrés.");
+    if(readError)throw readError;if(!rows?.length)throw new Error("Aucun paramètre existant.");
+    const {error}=await db.from("referral_settings").update({level_1_percent:l1,level_2_percent:l2,level_3_percent:l3,updated_at:new Date().toISOString()}).eq("id",rows[0].id);
+    if(error)throw error;message("admin-message","Paramètres de parrainage enregistrés.");
   }catch(error){message("admin-message",readableError(error),"err")}
 }
-
 async function adminChangePassword(){
   try{
-    await requireAdmin();
-    const p1=el("admin-new-password").value;
-    const p2=el("admin-confirm-password").value;
+    await requireAdmin();const p1=el("admin-new-password").value,p2=el("admin-confirm-password").value;
     if(p1.length<6)throw new Error("Le mot de passe doit contenir au moins 6 caractères.");
     if(p1!==p2)throw new Error("Les deux mots de passe ne correspondent pas.");
-    const {error}=await db.auth.updateUser({password:p1});
-    if(error)throw error;
-    el("admin-new-password").value="";
-    el("admin-confirm-password").value="";
+    const {error}=await db.auth.updateUser({password:p1});if(error)throw error;
+    el("admin-new-password").value="";el("admin-confirm-password").value="";
     message("admin-message","Mot de passe administrateur modifié.");
   }catch(error){message("admin-message","Modification impossible : "+readableError(error),"err")}
 }
@@ -1119,34 +822,19 @@ async function adminChangePassword(){
 /* INITIALISATION */
 async function init(){
   try{
-    const {data,error}=await db.auth.getSession();
-    if(error)throw error;
+    const {data,error}=await db.auth.getSession();if(error)throw error;
     currentUser=data.session?.user||null;
-
-    if(currentUser){
-      await loadProfile();
-      await updateConnectionUI();
-      showSection("dashboard");
-    }else{
-      await updateConnectionUI();
-      showSection("home");
-    }
-
+    if(currentUser){await loadProfile();await updateConnectionUI();showSection("dashboard")}
+    else{await updateConnectionUI();showSection("home")}
     db.auth.onAuthStateChange((_event,session)=>{
       currentUser=session?.user||null;
       setTimeout(async()=>{
-        if(currentUser){
-          try{await loadProfile()}catch(e){console.warn(e)}
-        }else{
-          currentProfile=null;adminVerified=false;
-          el("admin-open").classList.add("hidden");
-        }
+        if(currentUser){try{await loadProfile()}catch(e){console.warn(e)}}
+        else{currentProfile=null;adminVerified=false;el("admin-open").classList.add("hidden")}
         await updateConnectionUI();
       },0);
     });
-  }catch(error){
-    console.error("Initialisation Supabase:",error);
-  }
+  }catch(error){console.error("Initialisation Supabase:",error)}
 }
 init();
 </script>
